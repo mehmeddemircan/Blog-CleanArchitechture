@@ -13,7 +13,7 @@ public class BrandConfiguration : IEntityTypeConfiguration<Category>
 {
     public void Configure(EntityTypeBuilder<Category> builder)
     {
-        builder.ToTable("Brands").HasKey(b => b.Id);
+        builder.ToTable("Categories").HasKey(b => b.Id);
 
         builder.Property(b => b.Id).HasColumnName("Id").IsRequired();
         builder.Property(b => b.Name).HasColumnName("Name").IsRequired();
