@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Persistence.EntityConfigurations;
 
-public class BrandConfiguration : IEntityTypeConfiguration<Category>
+public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 {
     public void Configure(EntityTypeBuilder<Category> builder)
     {

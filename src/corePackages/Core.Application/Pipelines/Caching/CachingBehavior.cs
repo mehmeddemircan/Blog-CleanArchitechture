@@ -8,50 +8,60 @@ using System.Text;
 namespace Core.Application.Pipelines.Caching;
 
 public class CachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IRequest<TResponse>, ICachableRequest
+        where TRequest : IRequest<TResponse>, ICachableRequest
 {
     private readonly IDistributedCache _cache;
     private readonly ILogger<CachingBehavior<TRequest, TResponse>> _logger;
-
-    private readonly CacheSettings _cacheSettings;
+    private readonly IConfiguration _configuration;
 
     public CachingBehavior(IDistributedCache cache, ILogger<CachingBehavior<TRequest, TResponse>> logger,
-                           IConfiguration configuration)
+                          IConfiguration configuration)
     {
-        _cache = cache;
-        _logger = logger;
-        _cacheSettings = configuration.GetSection("CacheSettings").Get<CacheSettings>();
+        _cache = cache ?? throw new ArgumentNullException(nameof(cache));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
     }
 
-    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
-                                        RequestHandlerDelegate<TResponse> next)
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+
     {
-        TResponse response;
-        if (request.BypassCache) return await next();
+        // Check if caching is bypassed
+        if (request.BypassCache)
+            return await next();
 
-        async Task<TResponse> GetResponseAndAddToCache()
-        {
-            response = await next();
-            TimeSpan? slidingExpiration =
-                request.SlidingExpiration ?? TimeSpan.FromDays(_cacheSettings.SlidingExpiration);
-            DistributedCacheEntryOptions cacheOptions = new() { SlidingExpiration = slidingExpiration };
-            byte[] serializeData = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(response));
-            await _cache.SetAsync(request.CacheKey, serializeData, cacheOptions, cancellationToken);
-            return response;
-        }
-
-        byte[]? cachedResponse = await _cache.GetAsync(request.CacheKey, cancellationToken);
+        // Try to get cached response
+        var cachedResponse = await _cache.GetStringAsync(request.CacheKey, cancellationToken);
         if (cachedResponse != null)
         {
-            response = JsonConvert.DeserializeObject<TResponse>(Encoding.Default.GetString(cachedResponse));
             _logger.LogInformation($"Fetched from Cache -> {request.CacheKey}");
-        }
-        else
-        {
-            response = await GetResponseAndAddToCache();
-            _logger.LogInformation($"Added to Cache -> {request.CacheKey}");
+            return JsonConvert.DeserializeObject<TResponse>(cachedResponse);
         }
 
+        // Execute the request handler and cache the response
+        var response = await next();
+        await CacheResponseAsync(request, response, cancellationToken);
+
         return response;
+    }
+
+    private async Task CacheResponseAsync(TRequest request, TResponse response, CancellationToken cancellationToken)
+    {
+        var slidingExpiration = GetSlidingExpiration();
+        var cacheOptions = new DistributedCacheEntryOptions
+        {
+            SlidingExpiration = slidingExpiration
+        };
+
+        var serializedResponse = JsonConvert.SerializeObject(response);
+        var encodedResponse = Encoding.UTF8.GetBytes(serializedResponse);
+        await _cache.SetAsync(request.CacheKey, encodedResponse, cacheOptions, cancellationToken);
+
+        _logger.LogInformation($"Added to Cache -> {request.CacheKey}");
+    }
+
+    private TimeSpan GetSlidingExpiration()
+    {
+        var slidingExpirationInDays = _configuration.GetValue<int>("CacheSettings:SlidingExpiration", 1);
+        return TimeSpan.FromDays(slidingExpirationInDays);
     }
 }

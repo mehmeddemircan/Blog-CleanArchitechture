@@ -14,16 +14,23 @@ public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
         _validators = validators;
     }
 
-    public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
-                                  RequestHandlerDelegate<TResponse> next)
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+
     {
-        ValidationContext<object> context = new(request);
-        List<ValidationFailure> failures = _validators
-                                           .Select(validator => validator.Validate(context))
-                                           .SelectMany(result => result.Errors)
-                                           .Where(failure => failure != null)
-                                           .ToList();
-        if (failures.Count != 0) throw new ValidationException(failures);
-        return next();
+        // Run all validators against the request
+        var validationContext = new ValidationContext<TRequest>(request);
+        var validationResults = await Task.WhenAll(_validators.Select(v => v.ValidateAsync(validationContext, cancellationToken)));
+        var failures = validationResults.SelectMany(r => r.Errors).Where(f => f != null).ToList();
+
+        // If there are validation failures, throw a ValidationException
+        if (failures.Count != 0)
+        {
+            throw new ValidationException(failures);
+        }
+
+        // Continue to the next handler in the pipeline
+        return await next();
     }
+
+    
 }

@@ -7,7 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace Core.Application.Pipelines.Authorization;
 
 public class AuthorizationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IRequest<TResponse>, ISecuredRequest
+       where TRequest : IRequest<TResponse>, ISecuredRequest
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -16,8 +16,7 @@ public class AuthorizationBehavior<TRequest, TResponse> : IPipelineBehavior<TReq
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
-                                        RequestHandlerDelegate<TResponse> next)
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
         List<string>? roleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
 
