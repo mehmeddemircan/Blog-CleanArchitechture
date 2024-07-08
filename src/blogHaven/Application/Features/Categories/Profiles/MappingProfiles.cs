@@ -23,7 +23,9 @@ namespace Application.Features.Categories.Profiles
             CreateMap<IPaginate<Category>, ResponseCategoryListModel>().ReverseMap();
             CreateMap<Category, ResponseCategoryListDto>().ReverseMap();
             CreateMap<Category,ResponseCategoryByIdDto>().ReverseMap();
-         
+
+
+
 
 
 

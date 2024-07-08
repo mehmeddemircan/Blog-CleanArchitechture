@@ -23,7 +23,10 @@ namespace Application.Features.Tags.Profiles
             CreateMap<Tag, CreateTagCommand>().ReverseMap();
             CreateMap<IPaginate<Tag>, ResponseTagListModel>()
                 .ReverseMap();
-            CreateMap<Tag, ResponseTagListDto>()
+            CreateMap<Tag, ResponseTagListDto>().ReverseMap();
+
+
+            CreateMap<Tag, ResponseTagByIdDto>()
                  .ForMember(c => c.CategoryName, opt => opt.MapFrom(c => c.Category.Name))
                 .ReverseMap();
         }

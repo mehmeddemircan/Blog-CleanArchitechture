@@ -31,7 +31,7 @@ namespace Application.Features.Categories.Queries.GetByIdCategory
 
             public async Task<ResponseCategoryByIdDto> Handle(GetByIdCategoryQuery request, CancellationToken cancellationToken)
             {
-                Category? category = await _categoryRepository.GetAsync(b => b.Id == request.Id);
+                Category? category = await _categoryRepository.GetDetailsAsync(b => b.Id == request.Id, b => b.Tags);
 
                 _categoryBusinessRules.CategoryShouldExistWhenRequested(category);
 
