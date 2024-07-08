@@ -9,7 +9,7 @@ namespace WebApi.Controllers
     {
         protected IMediator? Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>()?? throw new InvalidOperationException("IMediator cannot be retrieved from request services.");
         private IMediator? _mediator;
-        protected string getIpAddress()
+        protected string GetIpAddress()
         {
             string ipAddress = Request.Headers.ContainsKey("X-Forwarded-For")
                 ? Request.Headers["X-Forwarded-For"].ToString()
@@ -18,7 +18,7 @@ namespace WebApi.Controllers
             return ipAddress;
         }
 
-        protected Guid getUserIdFromRequest() 
+        protected Guid GetUserIdFromRequest() 
         {
             var userId = Guid.Parse(HttpContext.User.GetUserId().ToString()!);
             return userId;

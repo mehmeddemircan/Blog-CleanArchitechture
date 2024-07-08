@@ -1,5 +1,7 @@
-﻿using Application.Features.Categories.Rules;
+﻿using Application.Features.Auths.Rules;
+using Application.Features.Categories.Rules;
 using Application.Features.Tags.Rules;
+using Application.Services.AuthService;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Caching;
 using Core.Application.Pipelines.Logging;
@@ -26,13 +28,16 @@ namespace Application
 
             services.AddScoped<CategoryBusinessRules>();
             services.AddScoped<TagBusinessRules>();
+            services.AddScoped<AuthBusinessRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+
+            services.AddScoped<IAuthService, AuthManager>(); 
 
             return services;
 
