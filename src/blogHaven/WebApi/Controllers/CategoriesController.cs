@@ -1,4 +1,6 @@
 ﻿using Application.Features.Categories.Commands.CreateCategory;
+using Application.Features.Categories.Commands.DeleteCategory;
+using Application.Features.Categories.Commands.UpdateCategory;
 using Application.Features.Categories.Dtos;
 using Application.Features.Categories.Models;
 using Application.Features.Categories.Queries.GetByIdCategory;
@@ -9,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class CategoriesController : BaseController
     {
@@ -17,7 +19,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CreateCategoryCommand createCategoryCommand)
         {
-            ResponseCreateCategoryDto result = await Mediator.Send(createCategoryCommand);
+            var result = await Mediator.Send(createCategoryCommand);
             return Created("", result);
         }
 
@@ -25,7 +27,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
         {
             GetListCategoryQuery getListCategoryQuery = new() { PageRequest = pageRequest };
-            ResponseCategoryListModel result = await Mediator.Send(getListCategoryQuery);
+            var result = await Mediator.Send(getListCategoryQuery);
             return Ok(result);
         }
 
@@ -34,8 +36,22 @@ namespace WebApi.Controllers
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetById([FromRoute] GetByIdCategoryQuery getByIdCategoryQuery)
         {
-          ResponseCategoryByIdDto responseCategoryByIdDto = await Mediator.Send(getByIdCategoryQuery);
+          var responseCategoryByIdDto = await Mediator.Send(getByIdCategoryQuery);
             return Ok(responseCategoryByIdDto);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateCategoryCommand updateCategoryCommand)
+        {
+            var responseUpdateCategoryDto = await Mediator.Send(updateCategoryCommand);
+            return Ok(responseUpdateCategoryDto);
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> Delete([FromRoute] DeleteCategoryCommand deleteCategoryCommand)
+        {
+            var responseDeleteCategoryDto = await Mediator.Send(deleteCategoryCommand);
+            return Ok(responseDeleteCategoryDto);
         }
     }
 }

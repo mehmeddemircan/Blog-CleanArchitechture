@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services.Repositories
 {
-    public interface ICategoryRepository : IAsyncRepository<Category> , IRepository<Category>
+    public interface ICategoryRepository : IAsyncRepository<Category> 
     {
     }
 }

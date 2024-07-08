@@ -75,7 +75,7 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
     public async Task<TEntity> DeleteAsync(TEntity entity)
     {
         Context.Entry(entity).State = EntityState.Deleted;
-        await Context.SaveChangesAsync();
+        var data = await Context.SaveChangesAsync();
         return entity;
     }
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services.Repositories
 {
-    public interface ITagRepository : IAsyncRepository<Tag>, IRepository<Tag>
+    public interface ITagRepository : IAsyncRepository<Tag>
     {
     }
 }
