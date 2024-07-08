@@ -1,6 +1,7 @@
 ﻿using Application.Features.Categories.Commands.CreateCategory;
 using Application.Features.Categories.Dtos;
 using Application.Features.Categories.Models;
+using Application.Features.Categories.Queries.GetByIdCategory;
 using AutoMapper;
 using Core.Persistence.Paging;
 using Domain.Entities;
@@ -21,6 +22,8 @@ namespace Application.Features.Categories.Profiles
             CreateMap<Category,CreateCategoryCommand>().ReverseMap();
             CreateMap<IPaginate<Category>, ResponseCategoryListModel>().ReverseMap();
             CreateMap<Category, ResponseCategoryListDto>().ReverseMap();
+            CreateMap<Category,ResponseCategoryByIdDto>().ReverseMap();
+         
 
 
 

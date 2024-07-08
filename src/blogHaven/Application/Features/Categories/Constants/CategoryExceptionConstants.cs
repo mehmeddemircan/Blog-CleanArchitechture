@@ -9,5 +9,6 @@ namespace Application.Features.Categories.Constants
     public static class CategoryExceptionConstants
     {
         public const string CategoryNameExists = "Category Name Already exists";
+        public const string CategoryShouldExistWhenRequested = "Requested brand does not exist";
     }
 }

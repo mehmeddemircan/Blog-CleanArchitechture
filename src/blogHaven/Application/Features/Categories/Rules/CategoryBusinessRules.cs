@@ -28,5 +28,13 @@ namespace Application.Features.Categories.Rules
                 throw new BusinessException(CategoryExceptionConstants.CategoryNameExists);
             }
         }
+
+        public void CategoryShouldExistWhenRequested(Category category)
+        {
+            if (category == null)
+            {
+                throw new BusinessException(CategoryExceptionConstants.CategoryShouldExistWhenRequested);
+            }
+        }
     }
 }
