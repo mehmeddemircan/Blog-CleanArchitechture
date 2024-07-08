@@ -1,5 +1,6 @@
-﻿using Application.Features.Categories.Commands.CreateCategory;
-using Application.Features.Categories.Constants;
+﻿using Application.Constants;
+using Application.Features.Categories.Commands.CreateCategory;
+
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,8 @@ namespace Application.Features.Categories.Validations
     {
         public CreateCategoryCommandValidator()
         {
-            RuleFor(c => c.Name).NotEmpty().WithMessage(CategoryValidationMessages.CategoryNameCanNotBeEmpty);
-            RuleFor(c => c.Name).MinimumLength(2).WithMessage(CategoryValidationMessages.CategoryNameMinLength);
+            RuleFor(c => c.Name).NotEmpty().WithMessage(ValidationMessages.CategoryNameCanNotBeEmpty);
+            RuleFor(c => c.Name).MinimumLength(2).WithMessage(ValidationMessages.CategoryNameMinLength);
         }
     }
 }

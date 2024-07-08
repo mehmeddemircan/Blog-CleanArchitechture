@@ -1,7 +1,7 @@
-﻿using Application.Features.Categories.Dtos;
+﻿using Application.Constants;
+using Application.Features.Categories.Dtos;
 using Application.Features.Tags.Dtos;
 using Application.Features.Tags.Rules;
-using Application.ResultMessages;
 using Application.Services.Repositories;
 using AutoMapper;
 using Core.Utilities.Results;
@@ -43,7 +43,7 @@ namespace Application.Features.Tags.Commands.CreateTag
                 Tag mappedEntity = _mapper.Map<Tag>(request);
                 Tag createTag = await _tagRepository.AddAsync(mappedEntity);
                 ResponseCreateTagDto createdTagDto = _mapper.Map<ResponseCreateTagDto>(createTag);
-                return new SuccessDataResult<ResponseCreateTagDto>(createdTagDto, Messages.Added);
+                return new SuccessDataResult<ResponseCreateTagDto>(createdTagDto, ResultMessages.Added);
             }
         }
     }

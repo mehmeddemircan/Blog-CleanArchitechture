@@ -1,7 +1,7 @@
-﻿using Application.Features.Categories.Commands.DeleteCategory;
+﻿using Application.Constants;
+using Application.Features.Categories.Commands.DeleteCategory;
 using Application.Features.Categories.Dtos;
 using Application.Features.Categories.Rules;
-using Application.ResultMessages;
 using Application.Services.Repositories;
 using AutoMapper;
 using Core.Utilities.Results;
@@ -38,7 +38,7 @@ namespace Application.Features.Categories.Commands.DeleteCategory
                 Category mappedEntity = _mapper.Map<Category>(request);
                 Category deleteCategory = await _categoryRepository.DeleteAsync(mappedEntity);
                 ResponseDeleteCategoryDto deletedCategoryDto = _mapper.Map<ResponseDeleteCategoryDto>(deleteCategory);
-                return new SuccessDataResult<ResponseDeleteCategoryDto>(deletedCategoryDto, Messages.Deleted);
+                return new SuccessDataResult<ResponseDeleteCategoryDto>(deletedCategoryDto, ResultMessages.Deleted);
 
             }
 

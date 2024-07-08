@@ -1,6 +1,6 @@
-﻿using Application.Features.Categories.Dtos;
+﻿using Application.Constants;
+using Application.Features.Categories.Dtos;
 using Application.Features.Categories.Rules;
-using Application.ResultMessages;
 using Application.Services.Repositories;
 using AutoMapper;
 using Core.Utilities.Results;
@@ -12,19 +12,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Categories.Commands.CreateCategory
+namespace Application.Features.Categories.Commands.UpdateCategory
 {
-    public partial class CreateCategoryCommand : IRequest<IDataResult<ResponseCreateCategoryDto>>
+    public partial class UpdateCategoryCommand : IRequest<IDataResult<ResponseUpdateCategoryDto>>
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
-        public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, IDataResult<ResponseCreateCategoryDto>>
+        public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, IDataResult<ResponseUpdateCategoryDto>>
         {
             private readonly ICategoryRepository _categoryRepository;
             private readonly IMapper _mapper;
             private readonly CategoryBusinessRules _categoryBusinessRules;
 
-            public CreateCategoryCommandHandler(ICategoryRepository categoryRepository, IMapper mapper,
+            public UpdateCategoryCommandHandler(ICategoryRepository categoryRepository, IMapper mapper,
                                              CategoryBusinessRules categoryBusinessRules)
             {
                 _categoryRepository = categoryRepository;
@@ -32,15 +34,15 @@ namespace Application.Features.Categories.Commands.CreateCategory
                 _categoryBusinessRules = categoryBusinessRules;
             }
 
-            public async Task<IDataResult<ResponseCreateCategoryDto>> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
+            public async Task<IDataResult<ResponseUpdateCategoryDto>> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
             {
                 await _categoryBusinessRules.CategoryNameCanNotBeDuplicatedWhenInserted(request.Name);
 
 
                 Category mappedEntity = _mapper.Map<Category>(request);
-                Category createCategory = await _categoryRepository.AddAsync(mappedEntity);
-                ResponseCreateCategoryDto createdCategoryDto = _mapper.Map<ResponseCreateCategoryDto>(createCategory);
-                return new SuccessDataResult<ResponseCreateCategoryDto>(createdCategoryDto, Messages.Added);
+                Category updateCategory = await _categoryRepository.UpdateAsync(mappedEntity);
+                ResponseUpdateCategoryDto updatedCategoryDto = _mapper.Map<ResponseUpdateCategoryDto>(updateCategory);
+                return new SuccessDataResult<ResponseUpdateCategoryDto>(updatedCategoryDto, ResultMessages.Updated);
             }
         }
     }

@@ -1,5 +1,5 @@
-﻿using Application.Features.Categories.Constants;
-using Application.Features.Tags.Constants;
+﻿
+using Application.Constants;
 using Application.Services.Repositories;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Persistence.Paging;
@@ -26,7 +26,7 @@ namespace Application.Features.Tags.Rules
             IPaginate<Tag> result = await _tagRepository.GetListAsync(b => b.Name == name);
             if (result.Items.Any())
             {
-                throw new BusinessException(TagExceptionConstants.TagNameExists);
+                throw new BusinessException(ExceptionMessages.TagNameExists);
             }
         }
 
@@ -34,7 +34,7 @@ namespace Application.Features.Tags.Rules
         {
             if (tag == null)
             {
-                throw new BusinessException(TagExceptionConstants.TagShouldExistWhenRequested);
+                throw new BusinessException(ExceptionMessages.TagShouldExistWhenRequested);
             }
         }
     }

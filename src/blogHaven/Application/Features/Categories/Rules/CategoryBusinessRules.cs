@@ -1,4 +1,5 @@
-﻿using Application.Features.Categories.Constants;
+﻿using Application.Constants;
+
 using Application.Services.Repositories;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Persistence.Paging;
@@ -25,7 +26,7 @@ namespace Application.Features.Categories.Rules
             IPaginate<Category> result = await _categoryRepository.GetListAsync(b => b.Name == name);
             if (result.Items.Any())
             {
-                throw new BusinessException(CategoryExceptionConstants.CategoryNameExists);
+                throw new BusinessException(ExceptionMessages.CategoryNameExists);
             }
         }
 
@@ -33,7 +34,7 @@ namespace Application.Features.Categories.Rules
         {
             if (category == null)
             {
-                throw new BusinessException(CategoryExceptionConstants.CategoryShouldExistWhenRequested);
+                throw new BusinessException(ExceptionMessages.CategoryShouldExistWhenRequested);
             }
         }
     }

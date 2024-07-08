@@ -1,7 +1,7 @@
-﻿using Application.Features.Categories.Dtos;
+﻿using Application.Constants;
+using Application.Features.Categories.Dtos;
 using Application.Features.Tags.Dtos;
 using Application.Features.Tags.Rules;
-using Application.ResultMessages;
 using Application.Services.Repositories;
 using AutoMapper;
 using Core.Utilities.Results;
@@ -38,7 +38,7 @@ namespace Application.Features.Tags.Commands.DeleteTag
                 Tag mappedEntity = _mapper.Map<Tag>(request);
                 Tag deleteTag = await _tagRepository.DeleteAsync(mappedEntity);
                 ResponseDeleteTagDto deletedTagDto = _mapper.Map<ResponseDeleteTagDto>(deleteTag);
-                return new SuccessDataResult<ResponseDeleteTagDto>(deletedTagDto, Messages.Deleted);
+                return new SuccessDataResult<ResponseDeleteTagDto>(deletedTagDto, ResultMessages.Deleted);
 
             }
 

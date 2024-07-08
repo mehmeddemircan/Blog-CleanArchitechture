@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Auths.Constants
+namespace Application.Constants
 {
     public static class AuthMessages
     {
@@ -21,5 +21,4 @@ namespace Application.Features.Auths.Constants
         public const string UserMailAlreadyExists = "UserMailAlreadyExists";
         public const string PasswordDontMatch = "PasswordDontMatch";
     }
-
 }

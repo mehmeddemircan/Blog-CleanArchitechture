@@ -1,7 +1,7 @@
-﻿using Application.Features.Categories.Dtos;
+﻿using Application.Constants;
+using Application.Features.Categories.Dtos;
 using Application.Features.Tags.Dtos;
 using Application.Features.Tags.Rules;
-using Application.ResultMessages;
 using Application.Services.Repositories;
 using AutoMapper;
 using Core.Utilities.Results;
@@ -45,7 +45,7 @@ namespace Application.Features.Tags.Commands.UpdateTag
                 Tag mappedEntity = _mapper.Map<Tag>(request);
                 Tag updateTag = await _tagRepository.UpdateAsync(mappedEntity);
                 ResponseUpdateTagDto updatedTagDto = _mapper.Map<ResponseUpdateTagDto>(updateTag);
-                return new SuccessDataResult<ResponseUpdateTagDto>(updatedTagDto, Messages.Updated);
+                return new SuccessDataResult<ResponseUpdateTagDto>(updatedTagDto, ResultMessages.Updated);
             }
         }
     }

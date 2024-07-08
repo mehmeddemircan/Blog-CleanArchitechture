@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.ResultMessages
+namespace Application.Constants
 {
-    public static class Messages
+    public static class ResultMessages
     {
         public static string UserAdded = "User successfully added";
         public static string UserNotFound = "User not found";
