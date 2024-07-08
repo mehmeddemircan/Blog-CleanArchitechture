@@ -14,11 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Categories\Models\" />
-    <Folder Include="Features\Categories\Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
 	  <PackageReference Include="MediatR" Version="12.3.0" />
   </ItemGroup>

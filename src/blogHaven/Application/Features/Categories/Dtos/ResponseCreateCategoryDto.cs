@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Categories.Dtos
 {
-    public class CreateCategoryDto : IDto
+    public class ResponseCreateCategoryDto : IDto
     {
 
         public int Id { get; set; }

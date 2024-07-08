@@ -1,6 +1,8 @@
 ﻿using Application.Features.Categories.Commands.CreateCategory;
 using Application.Features.Categories.Dtos;
-
+using Application.Features.Categories.Models;
+using Application.Features.Categories.Queries.GetListCategory;
+using Core.Application.Requests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,8 +16,16 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CreateCategoryCommand createCategoryCommand)
         {
-            CreateCategoryDto result = await Mediator.Send(createCategoryCommand);
+            ResponseCreateCategoryDto result = await Mediator.Send(createCategoryCommand);
             return Created("", result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
+        {
+            GetListCategoryQuery getListCategoryQuery = new() { PageRequest = pageRequest };
+            ResponseCategoryListModel result = await Mediator.Send(getListCategoryQuery);
+            return Ok(result);
         }
     }
 }

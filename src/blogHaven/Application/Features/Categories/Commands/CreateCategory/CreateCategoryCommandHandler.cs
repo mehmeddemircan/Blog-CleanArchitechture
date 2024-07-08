@@ -9,7 +9,7 @@ namespace Application.Features.Categories.Commands.CreateCategory
 {
     public partial class CreateCategoryCommand
     {
-        public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, CreateCategoryDto>
+        public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, ResponseCreateCategoryDto>
         {
             private readonly ICategoryRepository _categoryRepository;
             private readonly IMapper _mapper;
@@ -23,14 +23,14 @@ namespace Application.Features.Categories.Commands.CreateCategory
                 _categoryBusinessRules = categoryBusinessRules;
             }
 
-            public async Task<CreateCategoryDto> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
+            public async Task<ResponseCreateCategoryDto> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
             {
                 await _categoryBusinessRules.CategoryNameCanNotBeDuplicatedWhenInserted(request.Name);
 
 
                 Category mappedEntity = _mapper.Map<Category>(request);
                 Category createCategory = await _categoryRepository.AddAsync(mappedEntity);
-                CreateCategoryDto createdCategoryDto = _mapper.Map<CreateCategoryDto>(createCategory);
+                ResponseCreateCategoryDto createdCategoryDto = _mapper.Map<ResponseCreateCategoryDto>(createCategory);
                 return createdCategoryDto;
             }
         }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Categories.Commands.CreateCategory
 {
-    public partial class CreateCategoryCommand : IRequest<CreateCategoryDto>
+    public partial class CreateCategoryCommand : IRequest<ResponseCreateCategoryDto>
     {
         public string Name { get; set; }
     }
