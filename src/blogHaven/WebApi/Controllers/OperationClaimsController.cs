@@ -1,5 +1,8 @@
 ﻿
+
 using Application.Features.OperationClaims.Commands.CreateOperationClaim;
+using Application.Features.OperationClaims.Commands.Delete;
+using Application.Features.OperationClaims.Commands.Update;
 using Application.Features.OperationClaims.Queries.GetById;
 using Application.Features.OperationClaims.Queries.GetListOperationClaim;
 using Core.Application.Requests;
@@ -35,6 +38,20 @@ namespace WebApi.Controllers
         {
             var responseOperationClaimByIdDto = await Mediator.Send(getByIdOperationClaimQuery);
             return Ok(responseOperationClaimByIdDto);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateOperationClaimCommand updateOperationClaimCommand)
+        {
+            var responseUpdateOperationClaimDto = await Mediator.Send(updateOperationClaimCommand);
+            return Ok(responseUpdateOperationClaimDto);
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> Delete([FromRoute] DeleteOperationClaimCommand deleteOperationClaimCommand)
+        {
+            var responseDeleteOperationClaimDto = await Mediator.Send(deleteOperationClaimCommand);
+            return Ok(responseDeleteOperationClaimDto);
         }
     }
 }

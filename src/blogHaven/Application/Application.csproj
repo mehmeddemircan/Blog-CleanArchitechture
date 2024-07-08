@@ -19,9 +19,4 @@
 	  <PackageReference Include="MediatR" Version="12.3.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\OperationClaims\Commands\Delete\" />
-    <Folder Include="Features\OperationClaims\Commands\Update\" />
-  </ItemGroup>
-
 </Project>
