@@ -78,6 +78,41 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
         var data = await Context.SaveChangesAsync();
         return entity;
     }
+    public async Task<TEntity?> GetDetailsAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includes)
+    {
+
+        IQueryable<TEntity> query = Context.Set<TEntity>();
+
+        if (includes != null)
+        {
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+        }
+
+        return await query.FirstOrDefaultAsync(predicate);
+
+    }
+    public async Task<ICollection<TEntity>> DeleteRangeAsync(ICollection<TEntity> entities, bool permanent = false)
+
+    {
+
+        if (permanent)
+        {
+            Context.Set<TEntity>().RemoveRange(entities);
+        }
+        else
+        {
+            foreach (var entity in entities)
+            {
+                entity.IsDeleted = true;
+                Context.Set<TEntity>().Update(entity);
+            }
+        }
+        await Context.SaveChangesAsync();
+        return entities;
+    }
 
     public TEntity? Get(Expression<Func<TEntity, bool>> predicate)
     {
@@ -131,20 +166,5 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
         return entity;
     }
 
-    public async Task<TEntity?> GetDetailsAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includes)
-    {
-       
-            IQueryable<TEntity> query = Context.Set<TEntity>();
-
-            if (includes != null)
-            {
-                foreach (var include in includes)
-                {
-                    query = query.Include(include);
-                }
-            }
-
-            return await query.FirstOrDefaultAsync(predicate);
- 
-    }
+   
 }

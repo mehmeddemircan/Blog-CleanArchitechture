@@ -3,6 +3,7 @@ using Core.Persistence.Paging;
 using Core.Security.Entities;
 using Core.Security.JWT;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +16,20 @@ namespace Application.Services.AuthService
     {
         private readonly IUserOperationClaimRepository _userOperationClaimRepository;
         private readonly ITokenHelper _tokenHelper;
+        private readonly TokenOptions _tokenOptions;
         private readonly IRefreshTokenRepository _refreshTokenRepository;
 
-        public AuthManager(IUserOperationClaimRepository userOperationClaimRepository, ITokenHelper tokenHelper, IRefreshTokenRepository refreshTokenRepository)
+        public AuthManager(IUserOperationClaimRepository userOperationClaimRepository, ITokenHelper tokenHelper, IRefreshTokenRepository refreshTokenRepository,
+            IConfiguration configuration)
         {
             _userOperationClaimRepository = userOperationClaimRepository;
             _tokenHelper = tokenHelper;
             _refreshTokenRepository = refreshTokenRepository;
+
+            const string tokenOptionsConfigurationSection = "TokenOptions";
+            _tokenOptions =
+                configuration.GetSection(tokenOptionsConfigurationSection).Get<TokenOptions>()
+                ?? throw new NullReferenceException($"\"{tokenOptionsConfigurationSection}\" section cannot found in configuration");
         }
 
         public async Task<RefreshToken> AddRefreshToken(RefreshToken refreshToken)
@@ -50,5 +58,15 @@ namespace Application.Services.AuthService
             RefreshToken refreshToken = _tokenHelper.CreateRefreshToken(user, ipAddress);
             return await Task.FromResult(refreshToken);
         }
+
+        public async Task DeleteOldRefreshTokens(int userId)
+        {
+            List<RefreshToken> refreshTokens = await _refreshTokenRepository.GetOldRefreshTokensAsync(
+                userId,
+                _tokenOptions.RefreshTokenTTL
+            );
+            await _refreshTokenRepository.DeleteRangeAsync(refreshTokens);
+        }
+
     }
 }

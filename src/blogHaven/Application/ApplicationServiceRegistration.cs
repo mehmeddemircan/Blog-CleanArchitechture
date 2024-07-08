@@ -2,6 +2,7 @@
 using Application.Features.Categories.Rules;
 using Application.Features.Tags.Rules;
 using Application.Services.AuthService;
+using Application.Services.UserService;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Caching;
 using Core.Application.Pipelines.Logging;
@@ -38,6 +39,7 @@ namespace Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
             services.AddScoped<IAuthService, AuthManager>(); 
+            services.AddScoped<IUserService, UserManager>(); 
 
             return services;
 

@@ -1,4 +1,5 @@
 ﻿using Application.Features.Auth.Commands.Register;
+using Application.Features.Auths.Commands.Login;
 using Application.Features.Auths.Dtos;
 using Core.Security.Dtos;
 using Core.Security.Entities;
@@ -29,6 +30,18 @@ namespace WebApi.Controllers
         {
             CookieOptions cookieOptions = new() { HttpOnly = true, Expires = DateTime.Now.AddDays(7) };
             Response.Cookies.Append("refreshToken", refreshToken.Token, cookieOptions);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto)
+        {
+            LoginCommand loginCommand = new() { UserForLoginDto = userForLoginDto, IpAddress = GetIpAddress() };
+            var result = await Mediator.Send(loginCommand);
+
+            if (result.RefreshToken is not null)
+                SetRefreshTokenToCookie(result.RefreshToken);
+
+            return Ok(result.ToHttpResponse());
         }
     }
 }

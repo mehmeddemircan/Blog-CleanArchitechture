@@ -21,7 +21,15 @@ public interface IAsyncRepository<T> : IQuery<T> where T : Entity
                                              int index = 0, int size = 10, bool enableTracking = true,
                                              CancellationToken cancellationToken = default);
 
+   
+
+
     Task<T> AddAsync(T entity);
-    Task<T> UpdateAsync(T entity);
+
     Task<T> DeleteAsync(T entity);
+    Task<T> UpdateAsync(T entity);
+
+    Task<ICollection<T>> DeleteRangeAsync(ICollection<T> entities, bool permanent = false);
+
+
 }
