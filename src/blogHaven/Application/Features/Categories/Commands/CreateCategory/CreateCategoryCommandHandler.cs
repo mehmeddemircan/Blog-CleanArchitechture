@@ -1,5 +1,6 @@
 ﻿using Application.Features.Categories.Dtos;
 using Application.Features.Categories.Rules;
+using Application.ResultMessages;
 using Application.Services.Repositories;
 using AutoMapper;
 using Core.Utilities.Results;
@@ -32,7 +33,7 @@ namespace Application.Features.Categories.Commands.CreateCategory
                 Category mappedEntity = _mapper.Map<Category>(request);
                 Category createCategory = await _categoryRepository.AddAsync(mappedEntity);
                 ResponseCreateCategoryDto createdCategoryDto = _mapper.Map<ResponseCreateCategoryDto>(createCategory);
-                return new SuccessDataResult<ResponseCreateCategoryDto>(createdCategoryDto, "Category Successfully Added"); 
+                return new SuccessDataResult<ResponseCreateCategoryDto>(createdCategoryDto, Messages.Added); 
             }
         }
     }

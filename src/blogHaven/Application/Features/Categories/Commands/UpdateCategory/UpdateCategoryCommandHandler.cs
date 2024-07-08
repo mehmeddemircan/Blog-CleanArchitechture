@@ -1,7 +1,9 @@
 ﻿using Application.Features.Categories.Dtos;
 using Application.Features.Categories.Rules;
+using Application.ResultMessages;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Utilities.Results;
 using Domain.Entities;
 using MediatR;
 using System;
@@ -14,7 +16,7 @@ namespace Application.Features.Categories.Commands.UpdateCategory
 {
     public partial class UpdateCategoryCommand
     {
-        public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, ResponseUpdateCategoryDto>
+        public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, IDataResult<ResponseUpdateCategoryDto>>
         {
             private readonly ICategoryRepository _categoryRepository;
             private readonly IMapper _mapper;
@@ -28,7 +30,7 @@ namespace Application.Features.Categories.Commands.UpdateCategory
                 _categoryBusinessRules = categoryBusinessRules;
             }
 
-            public async Task<ResponseUpdateCategoryDto> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
+            public async Task<IDataResult<ResponseUpdateCategoryDto>> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
             {
                 await _categoryBusinessRules.CategoryNameCanNotBeDuplicatedWhenInserted(request.Name);
 
@@ -36,7 +38,7 @@ namespace Application.Features.Categories.Commands.UpdateCategory
                 Category mappedEntity = _mapper.Map<Category>(request);
                 Category updateCategory = await _categoryRepository.UpdateAsync(mappedEntity);
                 ResponseUpdateCategoryDto updatedCategoryDto = _mapper.Map<ResponseUpdateCategoryDto>(updateCategory);
-                return updatedCategoryDto;
+                return new SuccessDataResult<ResponseUpdateCategoryDto>(updatedCategoryDto,Messages.Updated); 
             }
         }
     }
