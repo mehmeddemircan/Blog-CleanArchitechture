@@ -1,7 +1,10 @@
 ﻿
+
 using Application.Features.Categories.Dtos;
 using Application.Features.Categories.Models;
 using Application.Features.Tags.Commands.CreateTag;
+using Application.Features.Tags.Commands.DeleteTag;
+using Application.Features.Tags.Commands.UpdateTag;
 using Application.Features.Tags.Dtos;
 using Application.Features.Tags.Models;
 using AutoMapper;
@@ -29,6 +32,11 @@ namespace Application.Features.Tags.Profiles
             CreateMap<Tag, ResponseTagByIdDto>()
                  .ForMember(c => c.CategoryName, opt => opt.MapFrom(c => c.Category.Name))
                 .ReverseMap();
+
+            CreateMap<Tag, UpdateTagCommand>().ReverseMap();
+            CreateMap<Tag, ResponseUpdateTagDto>().ReverseMap();
+            CreateMap<Tag, ResponseDeleteTagDto>().ReverseMap();
+            CreateMap<Tag, DeleteTagCommand>().ReverseMap();
         }
     }
 }

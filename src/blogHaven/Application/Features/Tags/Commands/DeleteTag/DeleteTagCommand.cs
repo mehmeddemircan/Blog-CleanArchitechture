@@ -8,12 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Tags.Commands.CreateTag
+namespace Application.Features.Tags.Commands.DeleteTag
 {
-    public partial class CreateTagCommand : IRequest<IDataResult<ResponseCreateTagDto>>
+    public partial class DeleteTagCommand : IRequest<IDataResult<ResponseDeleteTagDto>>
     {
-        public string Name { get; set; }
+        public int Id { get; set; }
 
-        public int CategoryId { get; set; }
+
     }
 }

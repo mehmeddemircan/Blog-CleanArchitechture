@@ -14,17 +14,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Tags.Commands.CreateTag
+namespace Application.Features.Tags.Commands.DeleteTag
 {
-    public partial class CreateTagCommand
+    public partial class DeleteTagCommand
     {
-        public class CreateTagCommandHandler : IRequestHandler<CreateTagCommand, IDataResult<ResponseCreateTagDto>>
+        public class DeleteTagCommandHandler : IRequestHandler<DeleteTagCommand, IDataResult<ResponseDeleteTagDto>>
         {
             private readonly ITagRepository _tagRepository;
             private readonly IMapper _mapper;
             private readonly TagBusinessRules _tagBusinessRules;
 
-            public CreateTagCommandHandler(ITagRepository tagRepository, IMapper mapper,
+            public DeleteTagCommandHandler(ITagRepository tagRepository, IMapper mapper,
                                              TagBusinessRules tagBusinessRules)
             {
                 _tagRepository = tagRepository;
@@ -32,16 +32,17 @@ namespace Application.Features.Tags.Commands.CreateTag
                 _tagBusinessRules = tagBusinessRules;
             }
 
-            public async Task<IDataResult<ResponseCreateTagDto>> Handle(CreateTagCommand request, CancellationToken cancellationToken)
+            public async Task<IDataResult<ResponseDeleteTagDto>> Handle(DeleteTagCommand request, CancellationToken cancellationToken)
             {
-                await _tagBusinessRules.TagNameCanNotBeDuplicatedWhenInserted(request.Name);
-
-
                 Tag mappedEntity = _mapper.Map<Tag>(request);
-                Tag createTag = await _tagRepository.AddAsync(mappedEntity);
-                ResponseCreateTagDto createdTagDto = _mapper.Map<ResponseCreateTagDto>(createTag);
-                return new SuccessDataResult<ResponseCreateTagDto>(createdTagDto,Messages.Added);
+                Tag deleteTag = await _tagRepository.DeleteAsync(mappedEntity);
+                ResponseDeleteTagDto deletedTagDto = _mapper.Map<ResponseDeleteTagDto>(deleteTag);
+                return new SuccessDataResult<ResponseDeleteTagDto>(deletedTagDto, Messages.Deleted);
+
             }
+
+
         }
+
     }
 }

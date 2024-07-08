@@ -8,10 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Tags.Commands.CreateTag
+namespace Application.Features.Tags.Commands.UpdateTag
 {
-    public partial class CreateTagCommand : IRequest<IDataResult<ResponseCreateTagDto>>
+    public partial class UpdateTagCommand : IRequest<IDataResult<ResponseUpdateTagDto>>
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public int CategoryId { get; set; }
