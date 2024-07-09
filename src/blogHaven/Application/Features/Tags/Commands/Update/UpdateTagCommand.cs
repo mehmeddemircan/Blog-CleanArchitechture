@@ -43,6 +43,7 @@ namespace Application.Features.Tags.Commands.UpdateTag
 
 
                 Tag mappedEntity = _mapper.Map<Tag>(request);
+                mappedEntity.UpdatedTime = DateTime.UtcNow; 
                 Tag updateTag = await _tagRepository.UpdateAsync(mappedEntity);
                 ResponseUpdateTagDto updatedTagDto = _mapper.Map<ResponseUpdateTagDto>(updateTag);
                 return new SuccessDataResult<ResponseUpdateTagDto>(updatedTagDto, ResultMessages.Updated);

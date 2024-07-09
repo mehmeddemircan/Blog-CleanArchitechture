@@ -43,6 +43,7 @@ namespace Application.Features.UserOperationClaims.Commands.Update
 
 
                 UserOperationClaim mappedEntity = _mapper.Map<UserOperationClaim>(request);
+                mappedEntity.UpdatedTime = DateTime.UtcNow; 
                 UserOperationClaim updateUserOperationClaim = await _useroperationclaimRepository.UpdateAsync(mappedEntity);
                 ResponseUpdateUserOperationClaimDto updatedUserOperationClaimDto = _mapper.Map<ResponseUpdateUserOperationClaimDto>(updateUserOperationClaim);
                 return new SuccessDataResult<ResponseUpdateUserOperationClaimDto>(updatedUserOperationClaimDto, ResultMessages.Updated);

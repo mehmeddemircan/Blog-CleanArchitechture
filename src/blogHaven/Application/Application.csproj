@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Blogs\Commands\Update\" />
     <Folder Include="Features\Blogs\Queries\GetListByDynamic\" />
     <Folder Include="Features\UserOperationClaims\Queries\GetListByDynamic\" />
     <Folder Include="Features\Users\Validations\" />

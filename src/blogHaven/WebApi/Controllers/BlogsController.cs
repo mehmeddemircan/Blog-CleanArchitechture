@@ -1,5 +1,6 @@
 ﻿using Application.Features.Blogs.Commands.Create;
 using Application.Features.Blogs.Commands.Delete;
+using Application.Features.Blogs.Commands.Update;
 using Application.Features.Blogs.Queries.GetById;
 using Application.Features.Blogs.Queries.GetList;
 
@@ -44,6 +45,13 @@ namespace WebApi.Controllers
         {
             var responseDeleteBlogDto = await Mediator.Send(deleteBlogCommand);
             return Ok(responseDeleteBlogDto);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateBlogCommand updateBlogCommand)
+        {
+            var responseUpdateCategoryDto = await Mediator.Send(updateBlogCommand);
+            return Ok(responseUpdateCategoryDto);
         }
     }
 }

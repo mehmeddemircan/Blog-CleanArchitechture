@@ -1,5 +1,6 @@
 ﻿using Application.Features.Blogs.Commands.Create;
 using Application.Features.Blogs.Commands.Delete;
+using Application.Features.Blogs.Commands.Update;
 using Application.Features.Blogs.Dtos;
 using Application.Features.Blogs.Models;
 using Application.Features.Categories.Commands.DeleteCategory;
@@ -39,6 +40,9 @@ namespace Application.Features.Blogs.Profiles
 
             CreateMap<Blog, ResponseDeleteBlogDto>().ReverseMap();
             CreateMap<Blog, DeleteBlogCommand>().ReverseMap();
+
+            CreateMap<Blog, ResponseUpdateBlogDto>().ReverseMap();
+            CreateMap<Blog, UpdateBlogCommand>().ReverseMap();
         }
     }
 }
