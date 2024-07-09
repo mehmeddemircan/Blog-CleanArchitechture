@@ -16,16 +16,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.UserOperationClaims.Commands
+namespace Application.Features.UserOperationClaims.Commands.Create
 {
-    public partial class CreateUserOperationClaimCommand : IRequest<IDataResult<ResponseCreateUserOperationClaimDto>> 
+    public partial class CreateUserOperationClaimCommand : IRequest<IDataResult<ResponseCreateUserOperationClaimDto>>
     {
 
         public int UserId { get; set; }
 
         public int OperationClaimId { get; set; }
 
-       
+
 
         public class CreateUserOperationClaimCommandHandler : IRequestHandler<CreateUserOperationClaimCommand, IDataResult<ResponseCreateUserOperationClaimDto>>
         {

@@ -20,9 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\UserOperationClaims\Commands\Create\" />
-    <Folder Include="Features\UserOperationClaims\Models\" />
-    <Folder Include="Features\UserOperationClaims\Queries\" />
+    <Folder Include="Features\UserOperationClaims\Commands\Delete\" />
+    <Folder Include="Features\UserOperationClaims\Commands\Update\" />
+    <Folder Include="Features\UserOperationClaims\Queries\GetListByDynamic\" />
   </ItemGroup>
 
 </Project>
