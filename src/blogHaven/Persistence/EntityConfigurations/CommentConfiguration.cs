@@ -6,14 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Persistence.Repositories;
 
 namespace Persistence.EntityConfigurations
 {
-    public class BlogConfiguration : IEntityTypeConfiguration<Blog>
+    public class CommentConfiguration : IEntityTypeConfiguration<Comment>
     {
-        public void Configure(EntityTypeBuilder<Blog> builder)
+        public void Configure(EntityTypeBuilder<Comment> builder)
         {
-            builder.ToTable("Blogs"); // Table name
+
+            builder.ToTable("Comments"); // Table name
 
             builder.HasKey(b => b.Id); // Primary key
 
@@ -21,38 +23,31 @@ namespace Persistence.EntityConfigurations
                 .HasColumnName("Id")
                 .IsRequired();
 
-            builder.Property(b => b.Title)
-                .HasColumnName("Title")
-                .IsRequired()
-                .HasMaxLength(255);
-
-            builder.Property(b => b.Description)
-                .HasColumnName("Description")
-                .IsRequired()
-                .HasMaxLength(500);
-
-            builder.Property(b => b.ThumbNailImage)
-                .HasColumnName("ThumbNailImage")
-                .HasMaxLength(500);
-
             builder.Property(b => b.Content)
                 .HasColumnName("Content")
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(500);
 
-            builder.Property(b => b.CategoryId)
-                .HasColumnName("CategoryId")
+            builder.Property(b => b.BlogId)
+                .HasColumnName("BlogId")
                 .IsRequired();
 
             builder.Property(b => b.UserId)
                 .HasColumnName("UserId")
                 .IsRequired();
 
-            builder.HasOne(b => b.Category);
-            builder.HasOne(b => b.User);
-           
+         
 
+            builder.HasOne(e => e.Blog)
+               .WithMany(b => b.Comments)
+               .HasForeignKey(e => e.BlogId)
+               .OnDelete(DeleteBehavior.Restrict);
 
-            // Add common properties if needed
+            builder.HasOne(e => e.User)
+                .WithMany()
+                .HasForeignKey(e => e.UserId)
+                .OnDelete(DeleteBehavior.Restrict); // Use Restrict to prevent cycles
+
             builder.Property(b => b.CreatedTime)
                 .HasColumnName("CreatedTime")
                 .IsRequired();
@@ -68,9 +63,7 @@ namespace Persistence.EntityConfigurations
             builder.Property(b => b.IsDeleted)
                 .HasColumnName("IsDeleted")
                 .IsRequired();
+
         }
-
-    
-
     }
 }

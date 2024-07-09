@@ -1,4 +1,5 @@
 ﻿using Core.Persistence.Repositories;
+using Core.Security.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,10 @@ namespace Domain.Entities
     public class Comment : Entity
     {
 
+        public string Content { get; set; }
+        public int BlogId { get; set; }
+        public virtual Blog Blog { get; set; }
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
     }
 }

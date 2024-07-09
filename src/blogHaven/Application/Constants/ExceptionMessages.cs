@@ -38,5 +38,10 @@ namespace Application.Constants
         public const string BlogNameExists = "Blog Name Already exists";
         public const string BlogShouldExistWhenRequested = "Requested brand does not exist";
         #endregion
+
+        #region Comment
+      
+        public const string CommentShouldExistWhenRequested = "Requested Comment does not exist";
+        #endregion
     }
 }
