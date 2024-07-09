@@ -3,8 +3,9 @@ using Application.Features.Blogs.Commands.Delete;
 using Application.Features.Blogs.Commands.Update;
 using Application.Features.Blogs.Queries.GetById;
 using Application.Features.Blogs.Queries.GetList;
-
+using Application.Features.Blogs.Queries.GetListByDynamic;
 using Core.Application.Requests;
+using Core.Persistence.Dynamic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,14 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
+        [HttpPost("GetList/ByDynamic")]
+        public async Task<ActionResult> GetListByDynamic([FromQuery] PageRequest pageRequest, [FromBody] Dynamic dynamic)
+        {
+            GetListBlogByDynamicQuery getListByDynamicModelQuery = new GetListBlogByDynamicQuery { PageRequest = pageRequest, Dynamic = dynamic };
+            var result = await Mediator.Send(getListByDynamicModelQuery);
+            return Ok(result);
+
+        }
 
 
         [HttpGet("{Id}")]

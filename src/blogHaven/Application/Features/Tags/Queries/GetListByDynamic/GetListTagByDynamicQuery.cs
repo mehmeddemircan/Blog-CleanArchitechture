@@ -36,13 +36,13 @@ namespace Application.Features.Tags.Queries.GetListTagByCategory
 
             public async Task<IDataResult<ResponseTagListModel>> Handle(GetListTagByDynamicQuery request, CancellationToken cancellationToken)
             {
-                //car tags
+              
                 IPaginate<Tag> tags = await _tagRepository.GetListByDynamicAsync(request.Dynamic, include:
                                               m => m.Include(c => c.Category),
                                               index: request.PageRequest.Page,
                                               size: request.PageRequest.PageSize
                                               );
-                //dataTag
+               
                 ResponseTagListModel mappedTags = _mapper.Map<ResponseTagListModel>(tags);
                 return new SuccessDataResult<ResponseTagListModel>(mappedTags,ResultMessages.Listed);
             }
