@@ -21,8 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Blogs\Models\" />
-    <Folder Include="Features\Blogs\Queries\" />
+    <Folder Include="Features\Blogs\Commands\Delete\" />
+    <Folder Include="Features\Blogs\Commands\Update\" />
+    <Folder Include="Features\Blogs\Queries\GetListByDynamic\" />
     <Folder Include="Features\UserOperationClaims\Queries\GetListByDynamic\" />
     <Folder Include="Features\Users\Validations\" />
   </ItemGroup>

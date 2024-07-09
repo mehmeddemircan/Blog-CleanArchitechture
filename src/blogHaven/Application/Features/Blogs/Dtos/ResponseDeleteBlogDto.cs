@@ -2,5 +2,6 @@
 {
     public class ResponseDeleteBlogDto : IDto
     {
+        public int Id { get; set; }
     }
 }

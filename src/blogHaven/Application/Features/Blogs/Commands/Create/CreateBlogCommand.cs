@@ -15,7 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Blogs.Commands
+namespace Application.Features.Blogs.Commands.Create
 {
     public partial class CreateBlogCommand : IRequest<IDataResult<ResponseCreateBlogDto>>
     {
@@ -34,7 +34,7 @@ namespace Application.Features.Blogs.Commands
             private readonly IImageService _imageService;
 
             public CreateBlogCommandHandler(IBlogRepository blogRepository, IMapper mapper,
-                                             BlogBusinessRules blogBusinessRules,IImageService imageService)
+                                             BlogBusinessRules blogBusinessRules, IImageService imageService)
             {
                 _blogRepository = blogRepository;
                 _mapper = mapper;

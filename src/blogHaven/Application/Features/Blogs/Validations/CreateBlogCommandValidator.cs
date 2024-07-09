@@ -1,4 +1,4 @@
-﻿using Application.Features.Blogs.Commands;
+﻿using Application.Features.Blogs.Commands.Create;
 using FluentValidation;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,8 @@
-﻿
-using Application.Features.Blogs.Commands;
+﻿using Application.Features.Blogs.Commands.Create;
+using Application.Features.Blogs.Queries.GetById;
+using Application.Features.Blogs.Queries.GetList;
+
+using Core.Application.Requests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +18,23 @@ namespace WebApi.Controllers
         {
             var result = await Mediator.Send(createBlogCommand);
             return Created("", result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
+        {
+            GetListBlogQuery getListBlogQuery = new() { PageRequest = pageRequest };
+            var result = await Mediator.Send(getListBlogQuery);
+            return Ok(result);
+        }
+
+
+
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetById([FromRoute] GetByIdBlogQuery getByIdBlogQuery)
+        {
+            var responseBlogByIdDto = await Mediator.Send(getByIdBlogQuery);
+            return Ok(responseBlogByIdDto);
         }
     }
 }
