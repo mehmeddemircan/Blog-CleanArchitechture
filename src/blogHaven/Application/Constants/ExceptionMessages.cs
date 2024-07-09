@@ -29,5 +29,9 @@ namespace Application.Constants
         public const string UserOperationClaimNameExists = "UserOperationClaim Name Already exists";
         public const string UserOperationClaimShouldExistWhenRequested = "Requested brand does not exist";
         #endregion
+
+        #region User
+        public const string UserShouldExistWhenRequested = "Requested brand does not exist";
+        #endregion
     }
 }

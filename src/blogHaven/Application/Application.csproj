@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Features\UserOperationClaims\Queries\GetListByDynamic\" />
+    <Folder Include="Features\Users\Validations\" />
   </ItemGroup>
 
 </Project>
