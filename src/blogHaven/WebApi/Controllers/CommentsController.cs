@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Application.Features.Comments.Commands.Delete;
 using Application.Features.Comments.Commands.Update;
+using Application.Features.Comments.Queries.GetListByParentId;
+using Application.Features.Comments.Queries.GetListByBlogId;
 
 namespace WebApi.Controllers
 {
@@ -61,6 +63,22 @@ namespace WebApi.Controllers
         {
             var responseUpdateCommentDto = await Mediator.Send(updateCommentCommand);
             return Ok(responseUpdateCommentDto);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetRepliesOfComment(int? parentId, [FromQuery] PageRequest pageRequest)
+        {
+            GetListCommentByParentIdQuery getListCommentQuery = new() { ParentId = parentId, PageRequest = pageRequest };
+            var result = await Mediator.Send(getListCommentQuery);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetListCommentByBlog(int BlogId ,[FromQuery] PageRequest pageRequest)
+        {
+            GetListCommentByBlogIdQuery getListCommenByBlogIdQuery = new() {BlogId = BlogId ,  PageRequest = pageRequest };
+            var result = await Mediator.Send(getListCommenByBlogIdQuery);
+            return Ok(result);
         }
     }
 }

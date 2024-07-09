@@ -14,12 +14,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Comments.Queries.GetList
+namespace Application.Features.Comments.Queries.GetListByBlogId
 {
-    public class GetListCommentQuery : IRequest<IDataResult<ResponseCommentListModel>>
+    public class GetListCommentByBlogIdQuery : IRequest<IDataResult<ResponseCommentListModel>>
     {
+        public int BlogId { get; set; }
         public PageRequest PageRequest { get; set; }
-        public class GetListCommentQueryHandler : IRequestHandler<GetListCommentQuery, IDataResult<ResponseCommentListModel>>
+        public class GetListCommentQueryHandler : IRequestHandler<GetListCommentByBlogIdQuery, IDataResult<ResponseCommentListModel>>
         {
             private readonly ICommentRepository _commentRepository;
             private readonly IMapper _mapper;
@@ -30,11 +31,9 @@ namespace Application.Features.Comments.Queries.GetList
                 _mapper = mapper;
             }
 
-            public async Task<IDataResult<ResponseCommentListModel>> Handle(GetListCommentQuery request, CancellationToken cancellationToken)
+            public async Task<IDataResult<ResponseCommentListModel>> Handle(GetListCommentByBlogIdQuery request, CancellationToken cancellationToken)
             {
-                IPaginate<Comment> categories = await _commentRepository.GetListAsync(
-                      
-                    include: source =>
+                IPaginate<Comment> categories = await _commentRepository.GetListAsync(predicate: c => c.BlogId == request.BlogId && c.ParentId == null, include: source =>
                                                  source.Include(b => b.User)
                                                 .Include(b => b.Blog),
                                                 index: request.PageRequest.Page,

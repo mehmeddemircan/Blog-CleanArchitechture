@@ -21,6 +21,7 @@ namespace Application.Features.Comments.Commands.Create
         public string Content { get; set; }
         public int UserId { get; set; }
         public int BlogId { get; set; }
+        public int? ParentId { get; set; }
 
         public class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand, IDataResult<ResponseCreateCommentDto>>
         {

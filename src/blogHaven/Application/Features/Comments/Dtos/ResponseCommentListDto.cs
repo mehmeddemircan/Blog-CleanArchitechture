@@ -10,5 +10,6 @@
         public int UserId { get; set; }
         public int BlogId { get; set; }
         public string BlogTitle { get; set; }
+        public int? ParentId { get; set; }
     }
 }

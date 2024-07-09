@@ -11,5 +11,6 @@ namespace Application.Features.Comments.Dtos
         public string Content { get; set; }
         public int UserId { get; set; }
         public int BlogId { get; set; }
+        public int? ParentId { get; set; }
     }
 }

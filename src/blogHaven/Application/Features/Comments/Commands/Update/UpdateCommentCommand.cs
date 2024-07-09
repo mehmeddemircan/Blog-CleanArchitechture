@@ -20,6 +20,7 @@ namespace Application.Features.Comments.Commands.Update
         public string Content { get; set; }
         public int BlogId { get; set; }
         public int UserId { get; set; }
+
         public class UpdateCommentCommandHandler : IRequestHandler<UpdateCommentCommand, IDataResult<ResponseUpdateCommentDto>>
         {
             private readonly ICommentRepository _commentRepository;
