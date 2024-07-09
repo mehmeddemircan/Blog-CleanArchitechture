@@ -40,6 +40,7 @@ namespace Application.Features.Categories.Commands.UpdateCategory
 
 
                 Category mappedEntity = _mapper.Map<Category>(request);
+                mappedEntity.UpdatedTime = DateTime.UtcNow; 
                 Category updateCategory = await _categoryRepository.UpdateAsync(mappedEntity);
                 ResponseUpdateCategoryDto updatedCategoryDto = _mapper.Map<ResponseUpdateCategoryDto>(updateCategory);
                 return new SuccessDataResult<ResponseUpdateCategoryDto>(updatedCategoryDto, ResultMessages.Updated);
