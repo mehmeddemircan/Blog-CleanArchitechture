@@ -12,6 +12,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Features.Blogs.Commands.Delete;
+using Application.Features.Blogs.Commands.Update;
+using Application.Features.Blogs.Dtos;
+using Application.Features.Comments.Commands.Delete;
+using Application.Features.Comments.Commands.Update;
 
 namespace Application.Features.Comments.Profiles
 {
@@ -35,6 +40,12 @@ namespace Application.Features.Comments.Profiles
             .ForMember(dest => dest.UserEmail, opt => opt.MapFrom(src => src.User.Email))
             .ForMember(dest => dest.BlogTitle, opt => opt.MapFrom(src => src.Blog.Title))
             .ReverseMap();
+
+            CreateMap<Comment, ResponseDeleteCommentDto>().ReverseMap();
+            CreateMap<Comment, DeleteCommentCommand>().ReverseMap();
+
+            CreateMap<Comment, ResponseUpdateCommentDto>().ReverseMap();
+            CreateMap<Comment, UpdateCommentCommand>().ReverseMap();
         }
     }
 }

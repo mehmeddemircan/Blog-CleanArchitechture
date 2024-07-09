@@ -21,8 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Comments\Commands\Delete\" />
-    <Folder Include="Features\Comments\Commands\Update\" />
     <Folder Include="Features\Users\Validations\" />
   </ItemGroup>
 

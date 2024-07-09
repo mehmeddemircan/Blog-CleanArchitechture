@@ -8,6 +8,8 @@ using Core.Persistence.Dynamic;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Application.Features.Comments.Commands.Delete;
+using Application.Features.Comments.Commands.Update;
 
 namespace WebApi.Controllers
 {
@@ -45,6 +47,20 @@ namespace WebApi.Controllers
         {
             var responseCommentByIdDto = await Mediator.Send(getByIdCommentQuery);
             return Ok(responseCommentByIdDto);
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> Delete([FromRoute] DeleteCommentCommand deleteCommentCommand)
+        {
+            var responseDeleteCommentDto = await Mediator.Send(deleteCommentCommand);
+            return Ok(responseDeleteCommentDto);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateCommentCommand updateCommentCommand)
+        {
+            var responseUpdateCommentDto = await Mediator.Send(updateCommentCommand);
+            return Ok(responseUpdateCommentDto);
         }
     }
 }
