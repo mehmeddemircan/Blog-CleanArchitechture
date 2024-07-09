@@ -16,5 +16,9 @@ namespace Domain.Entities
         public virtual Blog Blog { get; set; }
         public int UserId { get; set; }
         public virtual User User { get; set; }
+
+        public int? ParentId { get; set; }
+        public Comment Parent { get; set; }
+        public ICollection<Comment> Replies { get; set; } = new List<Comment>();
     }
 }

@@ -36,7 +36,10 @@ namespace Persistence.EntityConfigurations
                 .HasColumnName("UserId")
                 .IsRequired();
 
-         
+            builder.Property(b => b.ParentId)
+                .HasColumnName("ParentId")
+                .IsRequired(false);
+
 
             builder.HasOne(e => e.Blog)
                .WithMany(b => b.Comments)
@@ -47,6 +50,10 @@ namespace Persistence.EntityConfigurations
                 .WithMany()
                 .HasForeignKey(e => e.UserId)
                 .OnDelete(DeleteBehavior.Restrict); // Use Restrict to prevent cycles
+
+             builder.HasOne(c => c.Parent)
+            .WithMany(c => c.Replies)
+            .HasForeignKey(c => c.ParentId);
 
             builder.Property(b => b.CreatedTime)
                 .HasColumnName("CreatedTime")
