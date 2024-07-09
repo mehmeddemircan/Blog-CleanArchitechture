@@ -22,6 +22,8 @@ namespace Application.Constants
         public const string TitleMaxCharacterExceed = "Title cannot exceed 255 characters.";
         public const string DescriptionMaxCharacterExceed = "Description cannot exceed 500 characters.";
         public const string ContentMaxCharacterExceed = "Content cannot exceed 500 characters.";
+        public const string TopicIsRequired = "Topic is required";
+        public const string TopicMaxCharacterExceed = "Topic can not exceed 100 characters";
        
         #endregion
 

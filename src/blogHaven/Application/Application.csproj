@@ -23,6 +23,8 @@
   <ItemGroup>
     <Folder Include="Features\BlogTags\Models\" />
     <Folder Include="Features\BlogTags\Queries\" />
+    <Folder Include="Features\ContactUsMessages\Models\" />
+    <Folder Include="Features\ContactUsMessages\Queries\" />
     <Folder Include="Features\Users\Validations\" />
   </ItemGroup>
 

@@ -3,6 +3,7 @@ using Application.Features.Blogs.Rules;
 using Application.Features.BlogTags.Rules;
 using Application.Features.Categories.Rules;
 using Application.Features.Comments.Rules;
+using Application.Features.ContactUsMessages.Rules;
 using Application.Features.OperationClaims.Rules;
 using Application.Features.Tags.Rules;
 using Application.Features.UserOperationClaims.Rules;
@@ -43,6 +44,7 @@ namespace Application
             services.AddScoped<BlogBusinessRules>();
             services.AddScoped<CommentBusinessRules>();
             services.AddScoped<BlogTagBusinessRules>();
+            services.AddScoped<ContactUsMessageBusinessRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
