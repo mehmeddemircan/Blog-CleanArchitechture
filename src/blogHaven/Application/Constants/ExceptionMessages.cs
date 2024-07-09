@@ -24,5 +24,10 @@ namespace Application.Constants
         public const string TagNameExists = "Tag Name Already exists";
         public const string TagShouldExistWhenRequested = "Requested brand does not exist";
         #endregion
+
+        #region UserOperationClaim
+        public const string UserOperationClaimNameExists = "UserOperationClaim Name Already exists";
+        public const string UserOperationClaimShouldExistWhenRequested = "Requested brand does not exist";
+        #endregion
     }
 }

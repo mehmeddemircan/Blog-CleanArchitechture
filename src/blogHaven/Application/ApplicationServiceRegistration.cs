@@ -2,6 +2,7 @@
 using Application.Features.Categories.Rules;
 using Application.Features.OperationClaims.Rules;
 using Application.Features.Tags.Rules;
+using Application.Features.UserOperationClaims.Rules;
 using Application.Services.AuthService;
 using Application.Services.UserService;
 using Core.Application.Pipelines.Authorization;
@@ -32,6 +33,7 @@ namespace Application
             services.AddScoped<TagBusinessRules>();
             services.AddScoped<AuthBusinessRules>();
             services.AddScoped<OperationClaimBusinessRules>();
+            services.AddScoped<UserOperationClaimBusinessRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
