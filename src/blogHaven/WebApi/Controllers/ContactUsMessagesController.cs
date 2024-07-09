@@ -1,5 +1,8 @@
 ﻿
+
 using Application.Features.ContactUsMessages.Commands.Create;
+using Application.Features.ContactUsMessages.Commands.Delete;
+using Application.Features.ContactUsMessages.Commands.Update;
 using Application.Features.ContactUsMessages.Queries.GetById;
 using Application.Features.ContactUsMessages.Queries.GetList;
 using Core.Application.Requests;
@@ -34,6 +37,20 @@ namespace WebApi.Controllers
         {
             var responseContactUsMessageByIdDto = await Mediator.Send(getByIdContactUsMessageQuery);
             return Ok(responseContactUsMessageByIdDto);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateContactUsMessageCommand updateContactUsMessageCommand)
+        {
+            var responseUpdateContactUsMessageDto = await Mediator.Send(updateContactUsMessageCommand);
+            return Ok(responseUpdateContactUsMessageDto);
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> Delete([FromRoute] DeleteContactUsMessageCommand deleteContactUsMessageCommand)
+        {
+            var responseDeleteContactUsMessageDto = await Mediator.Send(deleteContactUsMessageCommand);
+            return Ok(responseDeleteContactUsMessageDto);
         }
 
     }

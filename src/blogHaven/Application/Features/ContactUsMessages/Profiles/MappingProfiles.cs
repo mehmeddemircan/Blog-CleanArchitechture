@@ -12,6 +12,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Features.ContactUsMessages.Commands.Delete;
+using Application.Features.ContactUsMessages.Commands.Update;
+using Application.Features.ContactUsMessages.Dtos;
 
 namespace Application.Features.ContactUsMessages.Profiles
 {
@@ -27,14 +30,18 @@ namespace Application.Features.ContactUsMessages.Profiles
             .ForMember(dest => dest.UserFirstName, opt => opt.MapFrom(src => src.User.FirstName))
             .ForMember(dest => dest.UserLastName, opt => opt.MapFrom(src => src.User.LastName))
             .ForMember(dest => dest.UserEmail, opt => opt.MapFrom(src => src.User.Email))
-            
             .ReverseMap();
             CreateMap<ContactUsMessage, ResponseContactUsMessageByIdDto>()
                 .ForMember(dest => dest.UserFirstName, opt => opt.MapFrom(src => src.User.FirstName))
             .ForMember(dest => dest.UserLastName, opt => opt.MapFrom(src => src.User.LastName))
             .ForMember(dest => dest.UserEmail, opt => opt.MapFrom(src => src.User.Email))
-            
             .ReverseMap();
+
+            CreateMap<ContactUsMessage, ResponseDeleteContactUsMessageDto>().ReverseMap();
+            CreateMap<ContactUsMessage, DeleteContactUsMessageCommand>().ReverseMap();
+
+            CreateMap<ContactUsMessage, ResponseUpdateContactUsMessageDto>().ReverseMap();
+            CreateMap<ContactUsMessage, UpdateContactUsMessageCommand>().ReverseMap();
         }
     }
 }
