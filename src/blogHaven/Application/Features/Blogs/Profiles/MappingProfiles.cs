@@ -6,6 +6,7 @@ using Application.Features.Blogs.Models;
 using Application.Features.Categories.Commands.DeleteCategory;
 using Application.Features.Categories.Dtos;
 using Application.Features.Categories.Models;
+using Application.Features.Tags.Dtos;
 using AutoMapper;
 using Core.Persistence.Paging;
 using Domain.Entities;
@@ -30,6 +31,7 @@ namespace Application.Features.Blogs.Profiles
             .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName))
             .ForMember(dest => dest.UserEmail, opt => opt.MapFrom(src => src.User.Email))
             .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
+            .ForMember(dest => dest.BlogTags, opt => opt.MapFrom(src => src.BlogTags))
             .ReverseMap();
             CreateMap<Blog, ResponseBlogByIdDto>()
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.User.FirstName))

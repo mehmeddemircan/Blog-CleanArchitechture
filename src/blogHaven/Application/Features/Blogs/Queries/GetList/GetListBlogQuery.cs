@@ -35,7 +35,9 @@ namespace Application.Features.Blogs.Queries.GetList
             {
                 IPaginate<Blog> categories = await _blogRepository.GetListAsync(include: source =>
                                                  source.Include(b => b.User)
-                                                .Include(b => b.Category),
+                                                .Include(b => b.Category)
+                                                .Include(b  => b.BlogTags)
+                                                    .ThenInclude(bt => bt.Tag),
                                                 index: request.PageRequest.Page,
                                                 size: request.PageRequest.PageSize);
 

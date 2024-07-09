@@ -1,4 +1,7 @@
-﻿namespace Application.Features.Blogs.Dtos
+﻿using Application.Features.BlogTags.Dtos;
+using Application.Features.Tags.Dtos;
+
+namespace Application.Features.Blogs.Dtos
 {
     public class ResponseBlogListDto : IDto
     {
@@ -13,6 +16,8 @@
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string UserEmail { get; set; }
+
+        public ICollection<ResponseBlogTagListDto> BlogTags { get; set; }
 
 
     }
