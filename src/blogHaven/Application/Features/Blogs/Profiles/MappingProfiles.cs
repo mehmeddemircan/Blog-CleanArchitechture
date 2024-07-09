@@ -1,6 +1,8 @@
 ﻿using Application.Features.Blogs.Commands.Create;
+using Application.Features.Blogs.Commands.Delete;
 using Application.Features.Blogs.Dtos;
 using Application.Features.Blogs.Models;
+using Application.Features.Categories.Commands.DeleteCategory;
 using Application.Features.Categories.Dtos;
 using Application.Features.Categories.Models;
 using AutoMapper;
@@ -34,6 +36,9 @@ namespace Application.Features.Blogs.Profiles
             .ForMember(dest => dest.UserEmail, opt => opt.MapFrom(src => src.User.Email))
             .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
             .ReverseMap();
+
+            CreateMap<Blog, ResponseDeleteBlogDto>().ReverseMap();
+            CreateMap<Blog, DeleteBlogCommand>().ReverseMap();
         }
     }
 }
