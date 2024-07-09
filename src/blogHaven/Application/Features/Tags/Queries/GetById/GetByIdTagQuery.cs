@@ -1,9 +1,11 @@
-﻿using Application.Features.Categories.Dtos;
+﻿using Application.Constants;
+using Application.Features.Categories.Dtos;
 using Application.Features.Categories.Rules;
 using Application.Features.Tags.Dtos;
 using Application.Features.Tags.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Utilities.Results;
 using Domain.Entities;
 using MediatR;
 using System;
@@ -14,11 +16,11 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Tags.Queries.GetByIdTag
 {
-    public class GetByIdTagQuery : IRequest<ResponseTagByIdDto>
+    public class GetByIdTagQuery : IRequest<IDataResult<ResponseTagByIdDto>>
     {
         public int Id { get; set; }
 
-        public class GetByIdTagQueryHandler : IRequestHandler<GetByIdTagQuery, ResponseTagByIdDto>
+        public class GetByIdTagQueryHandler : IRequestHandler<GetByIdTagQuery, IDataResult<ResponseTagByIdDto>>
         {
             private readonly ITagRepository _tagRepository;
             private readonly IMapper _mapper;
@@ -31,14 +33,14 @@ namespace Application.Features.Tags.Queries.GetByIdTag
                 _tagBusinessRules = tagBusinessRules;
             }
 
-            public async Task<ResponseTagByIdDto> Handle(GetByIdTagQuery request, CancellationToken cancellationToken)
+            public async Task<IDataResult<ResponseTagByIdDto>> Handle(GetByIdTagQuery request, CancellationToken cancellationToken)
             {
                 Tag? tag = await _tagRepository.GetDetailsAsync(b => b.Id == request.Id, b => b.Category);
 
                 _tagBusinessRules.TagShouldExistWhenRequested(tag);
 
                 ResponseTagByIdDto tagGetByIdDto = _mapper.Map<ResponseTagByIdDto>(tag);
-                return tagGetByIdDto;
+                return new SuccessDataResult<ResponseTagByIdDto>(tagGetByIdDto,ResultMessages.Listed);
             }
         }
     }

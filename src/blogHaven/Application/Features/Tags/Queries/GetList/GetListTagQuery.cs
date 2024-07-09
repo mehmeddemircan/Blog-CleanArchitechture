@@ -1,10 +1,12 @@
 ﻿
+using Application.Constants;
 using Application.Features.Tags.Models;
 
 using Application.Services.Repositories;
 using AutoMapper;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
+using Core.Utilities.Results;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +18,10 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Tags.Queries.GetListTag
 {
-    public class GetListTagQuery : IRequest<ResponseTagListModel>
+    public class GetListTagQuery : IRequest<IDataResult<ResponseTagListModel>>
     {
         public PageRequest PageRequest { get; set; }
-        public class GetListTagQueryHandler : IRequestHandler<GetListTagQuery, ResponseTagListModel>
+        public class GetListTagQueryHandler : IRequestHandler<GetListTagQuery, IDataResult<ResponseTagListModel>>
         {
             private readonly ITagRepository _tagRepository;
             private readonly IMapper _mapper;
@@ -30,7 +32,7 @@ namespace Application.Features.Tags.Queries.GetListTag
                 _mapper = mapper;
             }
 
-            public async Task<ResponseTagListModel> Handle(GetListTagQuery request, CancellationToken cancellationToken)
+            public async Task<IDataResult<ResponseTagListModel>> Handle(GetListTagQuery request, CancellationToken cancellationToken)
             {
                 IPaginate<Tag> tags = await _tagRepository.GetListAsync(include:
                                                 m => m.Include(c => c.Category),
@@ -40,7 +42,7 @@ namespace Application.Features.Tags.Queries.GetListTag
 
                 ResponseTagListModel mappedTagListTag = _mapper.Map<ResponseTagListModel>(tags);
 
-                return mappedTagListTag;
+                return new SuccessDataResult<ResponseTagListModel>(mappedTagListTag,ResultMessages.Listed);
             }
         }
     }

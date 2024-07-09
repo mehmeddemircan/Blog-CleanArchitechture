@@ -1,10 +1,12 @@
-﻿using Application.Features.Categories.Dtos;
+﻿using Application.Constants;
+using Application.Features.Categories.Dtos;
 using Application.Features.Categories.Rules;
 using Application.Features.OperationClaims.Dtos;
 using Application.Features.OperationClaims.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Core.Security.Entities;
+using Core.Utilities.Results;
 using Domain.Entities;
 using MediatR;
 using System;
@@ -15,11 +17,11 @@ using System.Threading.Tasks;
 
 namespace Application.Features.OperationClaims.Queries.GetById
 {
-    public class GetByIdOperationClaimQuery : IRequest<ResponseOperationClaimByIdDto>
+    public class GetByIdOperationClaimQuery : IRequest<IDataResult<ResponseOperationClaimByIdDto>>
     {
         public int Id { get; set; }
 
-        public class GetByIdOperationClaimQueryHandler : IRequestHandler<GetByIdOperationClaimQuery, ResponseOperationClaimByIdDto>
+        public class GetByIdOperationClaimQueryHandler : IRequestHandler<GetByIdOperationClaimQuery, IDataResult<ResponseOperationClaimByIdDto>>
         {
             private readonly IOperationClaimRepository _operationclaimRepository;
             private readonly IMapper _mapper;
@@ -32,14 +34,14 @@ namespace Application.Features.OperationClaims.Queries.GetById
                 _operationclaimBusinessRules = operationclaimBusinessRules;
             }
 
-            public async Task<ResponseOperationClaimByIdDto> Handle(GetByIdOperationClaimQuery request, CancellationToken cancellationToken)
+            public async Task<IDataResult<ResponseOperationClaimByIdDto>> Handle(GetByIdOperationClaimQuery request, CancellationToken cancellationToken)
             {
                 OperationClaim? operationclaim = await _operationclaimRepository.GetAsync(b => b.Id == request.Id);
 
                 _operationclaimBusinessRules.OperationClaimShouldExistWhenRequested(operationclaim);
 
                 ResponseOperationClaimByIdDto operationclaimGetByIdDto = _mapper.Map<ResponseOperationClaimByIdDto>(operationclaim);
-                return operationclaimGetByIdDto;
+                return new SuccessDataResult<ResponseOperationClaimByIdDto>(operationclaimGetByIdDto,ResultMessages.Listed);
             }
         }
     }
