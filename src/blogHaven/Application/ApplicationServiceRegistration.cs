@@ -1,10 +1,12 @@
 ﻿using Application.Features.Auths.Rules;
+using Application.Features.Blogs.Rules;
 using Application.Features.Categories.Rules;
 using Application.Features.OperationClaims.Rules;
 using Application.Features.Tags.Rules;
 using Application.Features.UserOperationClaims.Rules;
 using Application.Features.Users.Rules;
 using Application.Services.AuthService;
+using Application.Services.ImageService;
 using Application.Services.UserService;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Caching;
@@ -36,6 +38,7 @@ namespace Application
             services.AddScoped<OperationClaimBusinessRules>();
             services.AddScoped<UserOperationClaimBusinessRules>();
             services.AddScoped<UserBusinessRules>();
+            services.AddScoped<BlogBusinessRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
@@ -46,6 +49,9 @@ namespace Application
 
             services.AddScoped<IAuthService, AuthManager>(); 
             services.AddScoped<IUserService, UserManager>(); 
+            services.AddScoped<IImageService, ImageManager>(); 
+
+
 
             return services;
 

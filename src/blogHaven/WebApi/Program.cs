@@ -1,8 +1,10 @@
 using Application;
+using Application.Services.ImageService;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Security.Encryption;
 using Core.Security.JWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Persistence;
@@ -59,6 +61,12 @@ builder.Services.AddSwaggerGen(opt =>
     });
 });
 
+
+#region Cloudinary Upload Image
+var provider = builder.Services.BuildServiceProvider();
+var configuration = provider.GetRequiredService<IConfiguration>();
+builder.Services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
+#endregion
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

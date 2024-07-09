@@ -33,5 +33,10 @@ namespace Application.Constants
         #region User
         public const string UserShouldExistWhenRequested = "Requested brand does not exist";
         #endregion
+
+        #region Blog
+        public const string BlogNameExists = "Blog Name Already exists";
+        public const string BlogShouldExistWhenRequested = "Requested brand does not exist";
+        #endregion
     }
 }
