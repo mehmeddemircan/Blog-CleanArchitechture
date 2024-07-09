@@ -22,6 +22,7 @@ namespace Persistence.Contexts
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<BlogTag> BlogTags { get; set; }
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
