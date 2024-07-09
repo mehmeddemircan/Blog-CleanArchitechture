@@ -1,6 +1,9 @@
 ﻿
 using Application.Features.OperationClaims.Commands.CreateOperationClaim;
+
 using Application.Features.UserOperationClaims.Commands.Create;
+using Application.Features.UserOperationClaims.Commands.Delete;
+using Application.Features.UserOperationClaims.Commands.Update;
 using Application.Features.UserOperationClaims.Queries.GetById;
 using Application.Features.UserOperationClaims.Queries.GetList;
 using Core.Application.Requests;
@@ -15,7 +18,7 @@ namespace WebApi.Controllers
     public class UserOperationClaimsController : BaseController
     {
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] CreateUserOperationClaimCommand createUserOperationClaimCommand)
+        public async Task<IActionResult> AddRoleToUser([FromBody] CreateUserOperationClaimCommand createUserOperationClaimCommand)
         {
             var result = await Mediator.Send(createUserOperationClaimCommand);
             return Created("", result);
@@ -38,5 +41,18 @@ namespace WebApi.Controllers
             return Ok(responseUserOperationClaimByIdDto);
         }
 
+        [HttpPut]
+        public async Task<IActionResult> UpdateRoleOfUser([FromBody] UpdateUserOperationClaimCommand updateUserOperationClaimCommand)
+        {
+            var responseUpdateUserOperationClaimDto = await Mediator.Send(updateUserOperationClaimCommand);
+            return Ok(responseUpdateUserOperationClaimDto);
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> RemoveRoleOfUser([FromRoute] DeleteUserOperationClaimCommand deleteUserOperationClaimCommand)
+        {
+            var responseDeleteUserOperationClaimDto = await Mediator.Send(deleteUserOperationClaimCommand);
+            return Ok(responseDeleteUserOperationClaimDto);
+        }
     }
 }

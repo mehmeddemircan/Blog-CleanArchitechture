@@ -1,6 +1,7 @@
 ﻿using Application.Features.Auth.Commands.Register;
 using Application.Features.Auths.Commands.Login;
 using Application.Features.Auths.Dtos;
+using Application.Features.UserOperationClaims.Commands.Create;
 using Core.Security.Dtos;
 using Core.Security.Entities;
 using Microsoft.AspNetCore.Http;
@@ -21,9 +22,20 @@ namespace WebApi.Controllers
                 IpAddress = GetIpAddress()
             };
 
-            var result = await Mediator.Send(registerCommand);
-            SetRefreshTokenToCookie(result.RefreshToken);
-            return Created("", result.AccessToken);
+            var registerResult = await Mediator.Send(registerCommand);
+
+            // Kullanıcı kaydından sonra rol ekleme komutunu oluştur
+            CreateUserOperationClaimCommand createUserOperationClaimCommand = new()
+            {
+                UserId = registerResult.RefreshToken.UserId ,
+                OperationClaimId = 2  // User Role
+            };
+
+            // Rol ekleme komutunu gönder
+            var roleResult = await Mediator.Send(createUserOperationClaimCommand);
+
+            SetRefreshTokenToCookie(registerResult.RefreshToken);
+            return Created("", registerResult.AccessToken);
         }
 
         private void SetRefreshTokenToCookie(RefreshToken refreshToken)

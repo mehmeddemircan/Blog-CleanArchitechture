@@ -20,8 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\UserOperationClaims\Commands\Delete\" />
-    <Folder Include="Features\UserOperationClaims\Commands\Update\" />
     <Folder Include="Features\UserOperationClaims\Queries\GetListByDynamic\" />
   </ItemGroup>
 

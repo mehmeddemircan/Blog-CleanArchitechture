@@ -12,6 +12,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+using Application.Features.UserOperationClaims.Dtos;
+using Application.Features.UserOperationClaims.Commands.Update;
+using Application.Features.UserOperationClaims.Commands.Delete;
+
 namespace Application.Features.UserOperationClaims.Profiles
 {
     public class MappingProfiles : Profile
@@ -31,6 +36,12 @@ namespace Application.Features.UserOperationClaims.Profiles
              .ForMember(dest => dest.UserEmail, opt => opt.MapFrom(src => src.User.Email))
              .ForMember(dest => dest.OperationClaimName, opt => opt.MapFrom(src => src.OperationClaim.Name))
             .ReverseMap();
+
+
+            CreateMap<UserOperationClaim, UpdateUserOperationClaimCommand>().ReverseMap();
+            CreateMap<UserOperationClaim, ResponseUpdateUserOperationClaimDto>().ReverseMap();
+            CreateMap<UserOperationClaim, ResponseDeleteUserOperationClaimDto>().ReverseMap();
+            CreateMap<UserOperationClaim, DeleteUserOperationClaimCommand>().ReverseMap();
         }
     }
 }
