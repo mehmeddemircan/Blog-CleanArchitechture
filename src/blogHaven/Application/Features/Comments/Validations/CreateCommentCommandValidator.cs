@@ -1,4 +1,5 @@
-﻿using Application.Features.Comments.Commands.Create;
+﻿using Application.Constants;
+using Application.Features.Comments.Commands.Create;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,14 @@ namespace Application.Features.Comments.Validations
         public CreateCommentCommandValidator()
         {
             RuleFor(x => x.Content)
-                .NotEmpty().WithMessage("Content is required.")
-                .MaximumLength(500).WithMessage("Content cannot exceed 500 characters.");
+                .NotEmpty().WithMessage(ValidationMessages.ContentIsRequired)
+                .MaximumLength(500).WithMessage(ValidationMessages.ContentMaxCharacterExceed);
 
             RuleFor(x => x.BlogId)
-                .GreaterThan(0).WithMessage("BlogId must be greater than 0.");
+                .GreaterThan(0).WithMessage(ValidationMessages.BlogIdMustBeGreaterThanZero);
 
             RuleFor(x => x.UserId)
-                .GreaterThan(0).WithMessage("UserId must be greater than 0.");
+                .GreaterThan(0).WithMessage(ValidationMessages.UserIdMustBeGreaterThanZero);
         }
     }
 

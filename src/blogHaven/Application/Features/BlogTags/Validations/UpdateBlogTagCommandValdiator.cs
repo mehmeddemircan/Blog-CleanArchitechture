@@ -1,6 +1,6 @@
-﻿using Application.Constants;
-using Application.Features.BlogTags.Commands.Create;
-
+﻿
+using Application.Constants;
+using Application.Features.BlogTags.Commands.Update;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Application.Features.BlogTags.Validations
 {
-    public class CreateBlogTagCommandValidator : AbstractValidator<CreateBlogTagCommand>
+    public class UpdateBlogTagCommandValidator : AbstractValidator<UpdateBlogTagCommand>
     {
-        public CreateBlogTagCommandValidator()
+        public UpdateBlogTagCommandValidator()
         {
             RuleFor(x => x.BlogId)
                  .GreaterThan(0).WithMessage(ValidationMessages.BlogIdMustBeGreaterThanZero);

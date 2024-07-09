@@ -14,8 +14,8 @@ namespace Application.Features.OperationClaims.Validations
     {
         public CreateOperationClaimCommandValidator()
         {
-            RuleFor(c => c.Name).NotEmpty().WithMessage(ValidationMessages.TagNameCanNotBeEmpty);
-            RuleFor(c => c.Name).MinimumLength(2).WithMessage(ValidationMessages.TagNameMinLength);
+            RuleFor(c => c.Name).NotEmpty().WithMessage(ValidationMessages.OperationClaimNameCanNotBeEmpty);
+            RuleFor(c => c.Name).MinimumLength(2).WithMessage(ValidationMessages.OperationClaimNameMinLength);
         }
     }
 }
