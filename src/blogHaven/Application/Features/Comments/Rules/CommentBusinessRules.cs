@@ -2,6 +2,7 @@
 using Application.Services.Repositories;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Persistence.Paging;
+using Core.Security.Entities;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,14 @@ namespace Application.Features.Comments.Rules
             _commentRepository = commentRepository;
         }
 
-       
+        public async Task OneUserCanAddFiveCommentToSameBlog(int blogId, int userId)
+        {
+            IPaginate<Comment> result = await _commentRepository.GetListAsync(b => b.BlogId == blogId && b.UserId == userId);
+            if (result.Items.Count > 4)
+            {
+                throw new BusinessException(ExceptionMessages.OneUserCanAddFiveComment);
+            }
+        }
 
         public void CommentShouldExistWhenRequested(Comment comment)
         {

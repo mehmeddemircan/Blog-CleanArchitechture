@@ -40,8 +40,13 @@ namespace Application.Constants
         #endregion
 
         #region Comment
-      
+        public const string OneUserCanAddFiveComment = "A user can only add up to five comments to a blog.";
         public const string CommentShouldExistWhenRequested = "Requested Comment does not exist";
+        #endregion
+
+        #region BlogTag
+
+        public const string BlogTagExists = "Blog Tag Already exists";
         #endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Application.Constants;
+using Application.Features.Blogs.Rules;
 using Application.Features.BlogTags.Dtos;
 using Application.Features.BlogTags.Rules;
 using Application.Features.Categories.Dtos;
@@ -37,9 +38,9 @@ namespace Application.Features.BlogTags.Commands.Create
 
             public async Task<IDataResult<ResponseCreateBlogTagDto>> Handle(CreateBlogTagCommand request, CancellationToken cancellationToken)
             {
-                
-                //Todo : Aynı bloga aynı tagdan iki kere eklenemez iş kuralı 
 
+                //Todo : Aynı bloga aynı tagdan iki kere eklenemez iş kuralı 
+                await _blogtagBusinessRules.BlogTagCanNotBeDuplicatedWhenInserted(request.BlogId,request.TagId);
 
                 BlogTag mappedEntity = _mapper.Map<BlogTag>(request);
                 BlogTag createBlogTag = await _blogtagRepository.AddAsync(mappedEntity);

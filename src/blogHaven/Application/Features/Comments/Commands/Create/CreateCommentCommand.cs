@@ -38,8 +38,9 @@ namespace Application.Features.Comments.Commands.Create
 
             public async Task<IDataResult<ResponseCreateCommentDto>> Handle(CreateCommentCommand request, CancellationToken cancellationToken)
             {
-               
+
                 //Todo : Aynı kullanıcı bir bloga en fazla 5 yorum yapabilir 
+                await _commentBusinessRules.OneUserCanAddFiveCommentToSameBlog(request.BlogId, request.UserId); 
 
                 Comment mappedEntity = _mapper.Map<Comment>(request);
                 Comment createComment = await _commentRepository.AddAsync(mappedEntity);
