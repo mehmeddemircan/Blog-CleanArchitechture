@@ -48,5 +48,10 @@ namespace Application.Constants
 
         public const string BlogTagExists = "Blog Tag Already exists";
         #endregion
+
+        #region ContactUsMessage
+
+        public const string ContactUsMessageShouldExistWhenRequested = "Requested Contact Us Message does not exist";
+        #endregion
     }
 }
