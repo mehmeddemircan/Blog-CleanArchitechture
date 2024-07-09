@@ -1,6 +1,6 @@
 ﻿namespace Application.Features.UserOperationClaims.Constants;
 
-public static class UserOperationClaimsOperationClaims
+public static class UserOperationClaimsConstants
 {
     private const string _section = "UserOperationClaims";
 
