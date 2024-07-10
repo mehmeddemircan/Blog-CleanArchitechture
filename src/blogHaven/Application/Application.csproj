@@ -23,6 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\BlogLikeDislikes\Queries\" />
+    <Folder Include="Features\BlogLikeDislikes\Validations\" />
     <Folder Include="Features\BlogTags\Models\" />
     <Folder Include="Features\BlogTags\Queries\" />
     <Folder Include="Features\Users\Validations\" />

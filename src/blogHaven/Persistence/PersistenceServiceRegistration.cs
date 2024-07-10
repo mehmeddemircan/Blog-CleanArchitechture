@@ -33,6 +33,7 @@ namespace Persistence
             services.AddScoped<ICommentComplaintRepository, CommentComplaintRepository>();
             services.AddScoped<IContactUsMessageRepository, ContactUsMessageRepository>();
             services.AddScoped<IBlogComplaintRepository, BlogComplaintRepository>();
+            services.AddScoped<IBlogLikeDislikeRepository, BlogLikeDislikeRepository>();
 
             return services;
         }
