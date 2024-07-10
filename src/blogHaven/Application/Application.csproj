@@ -25,15 +25,12 @@
   <ItemGroup>
     <Folder Include="Features\BlogTags\Models\" />
     <Folder Include="Features\BlogTags\Queries\" />
-    <Folder Include="Features\CommentComplaints\Commands\Create\" />
     <Folder Include="Features\CommentComplaints\Commands\Delete\" />
     <Folder Include="Features\CommentComplaints\Commands\Update\" />
-    <Folder Include="Features\CommentComplaints\Models\" />
-    <Folder Include="Features\CommentComplaints\Dtos\" />
+    <Folder Include="Features\CommentComplaints\Queries\GetList\" />
+    <Folder Include="Features\CommentComplaints\Queries\GetById\" />
+    <Folder Include="Features\CommentComplaints\Queries\GetListByDynamic\" />
     <Folder Include="Features\CommentComplaints\Validations\" />
-    <Folder Include="Features\CommentComplaints\Rules\" />
-    <Folder Include="Features\CommentComplaints\Profiles\" />
-    <Folder Include="Features\CommentComplaints\Queries\" />
     <Folder Include="Features\Users\Validations\" />
   </ItemGroup>
 
