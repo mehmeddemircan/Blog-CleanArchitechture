@@ -53,5 +53,10 @@ namespace Application.Constants
 
         public const string ContactUsMessageShouldExistWhenRequested = "Requested Contact Us Message does not exist";
         #endregion
+
+        #region CommentComplaintMessage
+
+        public const string CommentComplaintShouldExistWhenRequested = "Requested Comment Complaint does not exist";
+        #endregion
     }
 }
