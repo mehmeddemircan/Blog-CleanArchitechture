@@ -25,7 +25,6 @@
   <ItemGroup>
     <Folder Include="Features\BlogTags\Models\" />
     <Folder Include="Features\BlogTags\Queries\" />
-    <Folder Include="Features\CommentComplaints\Validations\" />
     <Folder Include="Features\Users\Validations\" />
   </ItemGroup>
 

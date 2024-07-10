@@ -24,7 +24,9 @@ namespace Application.Constants
         public const string ContentMaxCharacterExceed = "Content cannot exceed 500 characters.";
         public const string TopicIsRequired = "Topic is required";
         public const string TopicMaxCharacterExceed = "Topic can not exceed 100 characters";
-       
+        public const string MessageIsRequired = "Message is required";
+        public const string MessageMaxCharacterExceed = "Message cannot exceed 500 characters.";
+
         #endregion
 
         #region Category
