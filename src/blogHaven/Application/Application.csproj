@@ -18,6 +18,8 @@
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="CloudinaryDotNet" Version="1.26.2" />
 	  <PackageReference Include="MediatR" Version="12.3.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.1.1" />
+	  <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.7" />
   </ItemGroup>
 
   <ItemGroup>

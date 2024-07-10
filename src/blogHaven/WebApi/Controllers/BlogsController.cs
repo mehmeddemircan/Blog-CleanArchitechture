@@ -1,13 +1,17 @@
-﻿using Application.Features.Blogs.Commands.Create;
+﻿using Application.Constants;
+using Application.Features.Blogs.Commands.Create;
 using Application.Features.Blogs.Commands.Delete;
 using Application.Features.Blogs.Commands.Update;
 using Application.Features.Blogs.Queries.GetById;
 using Application.Features.Blogs.Queries.GetList;
 using Application.Features.Blogs.Queries.GetListByDynamic;
+using Application.Resources;
 using Core.Application.Requests;
 using Core.Persistence.Dynamic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
+using System.Globalization;
 
 namespace WebApi.Controllers
 {
@@ -15,6 +19,8 @@ namespace WebApi.Controllers
     [ApiController]
     public class BlogsController : BaseController
     {
+
+      
 
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CreateBlogCommand createBlogCommand)
@@ -62,5 +68,7 @@ namespace WebApi.Controllers
             var responseUpdateCategoryDto = await Mediator.Send(updateBlogCommand);
             return Ok(responseUpdateCategoryDto);
         }
+
+       
     }
 }

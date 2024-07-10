@@ -16,7 +16,7 @@ namespace Application.Constants
         public const string CommentIdMustBeGreaterThanZero = "CommentId must be greater than 0.";
         public const string CategoryIdMustBeGreaterThanZero = "CategoryId must be greater than 0.";
 
-        public const string TitleIsRequired = "Title is required";
+        public const string TitleIsRequired = "TitleIsRequired";
         public const string ContentIsRequired = "Content is required";
         public const string DescriptionIsRequired = "Description is required";
         public const string TitleMaxCharacterExceed = "Title cannot exceed 255 characters.";
