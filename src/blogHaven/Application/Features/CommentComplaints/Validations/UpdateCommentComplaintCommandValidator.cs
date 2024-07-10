@@ -17,8 +17,6 @@ namespace Application.Features.CommentComplaints.Validations
                .NotEmpty().WithMessage(ValidationMessages.MessageIsRequired)
                .MaximumLength(500).WithMessage(ValidationMessages.MessageMaxCharacterExceed);
 
-
-
             RuleFor(x => x.CommentId)
                 .GreaterThan(0).WithMessage(ValidationMessages.CommentIdMustBeGreaterThanZero);
 

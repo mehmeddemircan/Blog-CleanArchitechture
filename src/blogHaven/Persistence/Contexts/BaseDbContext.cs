@@ -25,6 +25,7 @@ namespace Persistence.Contexts
         public DbSet<BlogTag> BlogTags { get; set; }
         public DbSet<ContactUsMessage> ContactUsMessages { get; set; }
         public DbSet<CommentComplaint> CommentComplaints { get; set; }
+        public DbSet<BlogComplaint> BlogComplaints { get; set; }
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
