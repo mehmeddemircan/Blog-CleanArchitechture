@@ -23,15 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\BlogComplaints\Commands\Create\" />
-    <Folder Include="Features\BlogComplaints\Commands\Delete\" />
-    <Folder Include="Features\BlogComplaints\Commands\Update\" />
-    <Folder Include="Features\BlogComplaints\Models\" />
-    <Folder Include="Features\BlogComplaints\Dtos\" />
-    <Folder Include="Features\BlogComplaints\Validations\" />
-    <Folder Include="Features\BlogComplaints\Rules\" />
-    <Folder Include="Features\BlogComplaints\Queries\" />
-    <Folder Include="Features\BlogComplaints\Profiles\" />
     <Folder Include="Features\BlogTags\Models\" />
     <Folder Include="Features\BlogTags\Queries\" />
     <Folder Include="Features\Users\Validations\" />

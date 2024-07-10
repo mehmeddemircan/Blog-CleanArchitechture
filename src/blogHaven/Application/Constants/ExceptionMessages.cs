@@ -58,5 +58,10 @@ namespace Application.Constants
 
         public const string CommentComplaintShouldExistWhenRequested = "Requested Comment Complaint does not exist";
         #endregion
+
+        #region BlogComplaintMessage
+
+        public const string BlogComplaintShouldExistWhenRequested = "Requested Blog Complaint does not exist";
+        #endregion
     }
 }
