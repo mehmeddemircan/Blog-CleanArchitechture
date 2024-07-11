@@ -1,4 +1,5 @@
-﻿using Application.Features.Categories.Commands.CreateCategory;
+﻿using Application.BusinessAspects;
+using Application.Features.Categories.Commands.CreateCategory;
 using Application.Features.Categories.Commands.DeleteCategory;
 using Application.Features.Categories.Commands.UpdateCategory;
 using Application.Features.Categories.Dtos;
@@ -24,6 +25,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
+        [SecuredOperation("Admin")]
         public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
         {
             GetListCategoryQuery getListCategoryQuery = new() { PageRequest = pageRequest };

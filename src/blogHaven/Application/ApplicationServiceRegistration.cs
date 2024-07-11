@@ -1,4 +1,5 @@
-﻿using Application.Features.Auths.Rules;
+﻿using Application.BusinessAspects;
+using Application.Features.Auths.Rules;
 using Application.Features.BlogComplaints.Rules;
 using Application.Features.BlogLikeDislikes.Rules;
 using Application.Features.Blogs.Rules;
@@ -63,8 +64,9 @@ namespace Application
 
             services.AddScoped<IAuthService, AuthManager>(); 
             services.AddScoped<IUserService, UserManager>(); 
-            services.AddScoped<IImageService, ImageManager>(); 
+            services.AddScoped<IImageService, ImageManager>();
 
+           
 
 
             return services;
