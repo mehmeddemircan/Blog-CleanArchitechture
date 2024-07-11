@@ -43,7 +43,7 @@ namespace Application.Features.UserOperationClaims.Commands.Create
 
             public async Task<IDataResult<ResponseCreateUserOperationClaimDto>> Handle(CreateUserOperationClaimCommand request, CancellationToken cancellationToken)
             {
-                await _useroperationclaimBusinessRules.UserOperationClaimCanNotBeDuplicatedWhenInserted(request.OperationClaimId);
+                await _useroperationclaimBusinessRules.UserOperationClaimCanNotBeDuplicatedWhenInsertedForUser(request.OperationClaimId,request.UserId);
 
 
                 UserOperationClaim mappedEntity = _mapper.Map<UserOperationClaim>(request);

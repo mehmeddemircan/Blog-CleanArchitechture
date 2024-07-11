@@ -25,6 +25,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
+        [Authentication]
         [SecuredOperation("Admin")]
         public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
         {
