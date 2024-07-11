@@ -34,6 +34,8 @@ namespace Application.Features.Categories.Commands.CreateCategory
 
             public async Task<IDataResult<ResponseCreateCategoryDto>> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
             {
+
+              
                 await _categoryBusinessRules.CategoryNameCanNotBeDuplicatedWhenInserted(request.Name);
 
 

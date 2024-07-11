@@ -23,10 +23,14 @@ namespace Application.Features.Categories.Rules
 
         public async Task CategoryNameCanNotBeDuplicatedWhenInserted(string name)
         {
+            
             IPaginate<Category> result = await _categoryRepository.GetListAsync(b => b.Name == name);
-            if (result.Items.Any())
+            if (result != null)
             {
-                throw new BusinessException(ExceptionMessages.CategoryNameExists);
+                if (result.Items.Any())
+                {
+                    throw new BusinessException(ExceptionMessages.CategoryNameExists);
+                }
             }
         }
 

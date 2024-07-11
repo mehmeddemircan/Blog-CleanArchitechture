@@ -33,7 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "src\blogHave
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "src\blogHaven\WebApi\WebApi.csproj", "{155B2352-5D1C-4C64-BD05-FC9B9EA295F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Utilities", "src\corePackages\Core.Utilities\Core.Utilities.csproj", "{392D0F2B-47A4-4D3C-AAFA-02479D0E63EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Utilities", "src\corePackages\Core.Utilities\Core.Utilities.csproj", "{392D0F2B-47A4-4D3C-AAFA-02479D0E63EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogHaven.Application.Tests", "src\tests\BlogHaven.Application.Tests\BlogHaven.Application.Tests.csproj", "{CCF53B32-6FE9-4EC8-AD5B-E97F6FAB1D1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +91,10 @@ Global
 		{392D0F2B-47A4-4D3C-AAFA-02479D0E63EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{392D0F2B-47A4-4D3C-AAFA-02479D0E63EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{392D0F2B-47A4-4D3C-AAFA-02479D0E63EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCF53B32-6FE9-4EC8-AD5B-E97F6FAB1D1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCF53B32-6FE9-4EC8-AD5B-E97F6FAB1D1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCF53B32-6FE9-4EC8-AD5B-E97F6FAB1D1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCF53B32-6FE9-4EC8-AD5B-E97F6FAB1D1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +114,7 @@ Global
 		{C79E208A-B50A-4B99-B2BA-DC44FC275376} = {7FFFE898-136A-4486-811F-8B8C65860B28}
 		{155B2352-5D1C-4C64-BD05-FC9B9EA295F3} = {7FFFE898-136A-4486-811F-8B8C65860B28}
 		{392D0F2B-47A4-4D3C-AAFA-02479D0E63EE} = {01B7F227-CE8F-41FD-9AF8-6AF5E5259161}
+		{CCF53B32-6FE9-4EC8-AD5B-E97F6FAB1D1F} = {1362EA01-9B01-4E17-A8FB-E42730A2AAB1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C127633B-AB1B-43AE-A516-DCF06F13F757}
