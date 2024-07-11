@@ -35,6 +35,7 @@ namespace Persistence
             services.AddScoped<IBlogComplaintRepository, BlogComplaintRepository>();
             services.AddScoped<IBlogLikeDislikeRepository, BlogLikeDislikeRepository>();
             services.AddScoped<ICommentLikeDislikeRepository, CommentLikeDislikeRepository>();
+            services.AddScoped<IBlogFavoriteRepository, BlogFavoriteRepository>();
 
             return services;
         }

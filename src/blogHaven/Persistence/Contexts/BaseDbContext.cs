@@ -28,6 +28,7 @@ namespace Persistence.Contexts
         public DbSet<BlogComplaint> BlogComplaints { get; set; }
         public DbSet<BlogLikeDislike> BlogLikeDislikes { get; set; }
         public DbSet<CommentLikeDislike> CommentLikeDislikes { get; set; }
+        public DbSet<BlogFavorite> BlogFavorites { get; set; }
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
