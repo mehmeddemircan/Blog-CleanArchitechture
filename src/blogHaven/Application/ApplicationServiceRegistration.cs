@@ -1,6 +1,7 @@
 ﻿using Application.BusinessAspects;
 using Application.Features.Auths.Rules;
 using Application.Features.BlogComplaints.Rules;
+using Application.Features.BlogFavorites.Rules;
 using Application.Features.BlogLikeDislikes.Rules;
 using Application.Features.Blogs.Rules;
 using Application.Features.BlogTags.Rules;
@@ -54,6 +55,7 @@ namespace Application
             services.AddScoped<BlogComplaintBusinessRules>();
             services.AddScoped<BlogLikeDislikeBusinessRules>();
             services.AddScoped<CommentLikeDislikeBusinessRules>();
+            services.AddScoped<BlogFavoriteBusinessRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));

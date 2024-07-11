@@ -72,5 +72,9 @@ namespace Application.Constants
 
         public const string CommentLikeDislikeShouldExistWhenRequested = "Requested Comment Like Dislike does not exist";
         #endregion
+
+        #region BlogFavorite
+        public const string BlogFavoriteShouldExistWhenRequested = "Requested Blog Favorite does not exist";
+        #endregion
     }
 }
