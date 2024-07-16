@@ -10,6 +10,7 @@ using Application.Features.CommentComplaints.Rules;
 using Application.Features.CommentLikeDislikes.Rules;
 using Application.Features.Comments.Rules;
 using Application.Features.ContactUsMessages.Rules;
+using Application.Features.FAQs.Rules;
 using Application.Features.OperationClaims.Rules;
 using Application.Features.Tags.Rules;
 using Application.Features.Testimonials.Rules;
@@ -58,6 +59,7 @@ namespace Application
             services.AddScoped<CommentLikeDislikeBusinessRules>();
             services.AddScoped<BlogFavoriteBusinessRules>();
             services.AddScoped<TestimonialBusinessRules>();
+            services.AddScoped<FAQBusinessRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));

@@ -81,5 +81,10 @@ namespace Application.Constants
         public const string TestimonialNameExists = "Testimonial  Already exists";
         public const string TestimonialShouldExistWhenRequested = "Requested brand does not exist";
         #endregion
+
+        #region FAQ
+        public const string FAQNameExists = "FAQ  Already exists";
+        public const string FAQShouldExistWhenRequested = "Requested brand does not exist";
+        #endregion
     }
 }

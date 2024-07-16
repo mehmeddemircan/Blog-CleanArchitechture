@@ -31,6 +31,7 @@ namespace Persistence.Contexts
         public DbSet<BlogFavorite> BlogFavorites { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
 
+        public DbSet<FAQ> FAQs { get; set; }
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
             Configuration = configuration;
