@@ -12,6 +12,7 @@ using Application.Features.Comments.Rules;
 using Application.Features.ContactUsMessages.Rules;
 using Application.Features.OperationClaims.Rules;
 using Application.Features.Tags.Rules;
+using Application.Features.Testimonials.Rules;
 using Application.Features.UserOperationClaims.Rules;
 using Application.Features.Users.Rules;
 using Application.Services.AuthService;
@@ -56,6 +57,7 @@ namespace Application
             services.AddScoped<BlogLikeDislikeBusinessRules>();
             services.AddScoped<CommentLikeDislikeBusinessRules>();
             services.AddScoped<BlogFavoriteBusinessRules>();
+            services.AddScoped<TestimonialBusinessRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));

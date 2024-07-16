@@ -76,5 +76,10 @@ namespace Application.Constants
         #region BlogFavorite
         public const string BlogFavoriteShouldExistWhenRequested = "Requested Blog Favorite does not exist";
         #endregion
+
+        #region Testimonial
+        public const string TestimonialNameExists = "Testimonial  Already exists";
+        public const string TestimonialShouldExistWhenRequested = "Requested brand does not exist";
+        #endregion
     }
 }
