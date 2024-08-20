@@ -42,7 +42,7 @@ namespace Application
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-
+            //add scoped , transiet , singleton arasında ki farkları öğren 
             services.AddScoped<CategoryBusinessRules>();
             services.AddScoped<TagBusinessRules>();
             services.AddScoped<AuthBusinessRules>();
